@@ -11,9 +11,13 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
+
+
 class ProfileViewController: UIViewController {
+    
 
     var db:Firestore!
+    var userData:UserData!
     
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var ProfileImageView: UIImageView!
@@ -23,12 +27,13 @@ class ProfileViewController: UIViewController {
     var activityView:UIActivityIndicatorView!
     var username = Auth.auth().currentUser?.email
     let uid = Auth.auth().currentUser?.uid
-    
+
     
 
     
         override func viewDidLoad() {
         super.viewDidLoad()
+            
             
                         // [START setup]
            let settings = FirestoreSettings()
@@ -36,8 +41,8 @@ class ProfileViewController: UIViewController {
           Firestore.firestore().settings = settings
             // [END setup]
           db = Firestore.firestore()
-            
-            addDoc()
+           // setDataFromDB()
+          //  addDoc()
 
         
         if let User = Auth.auth().currentUser {
@@ -84,24 +89,46 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    func addDoc() {
+    func setData() {
+        
+        user
         
         
-      let docData: [String: Any] = [
-               "first": "maor",
-               "last": "yadin",
-               "age": 25,
-               "email": username!,
-               "id": uid!,
-               "profilePicRef":FireBaseManager.getRef(path: "account/\(uid!)/profileImage.jpeg").fullPath
-               ]
-               
-               print("enter to add doc func")
-               
-               
-        db.collection("Users").document(uid!).setData(docData,merge: true)
-        
+//       let docRef = db.collection("Users").document(uid!)
+//        docRef.getDocument { (document, error) in
+//            if let document = document, document.exists {
+//                let dataDescription = document.data()!
+//
+//
+//                for (key,value) in dataDescription.enumerated() {
+//                    print("\(key):\(value)")
+//
+//                }
+//
+//            } else {
+//                print("Document does not exist")
+//            }
+//        }
     }
+    
+//    func addDoc() {
+//
+//
+//      let docData: [String: Any] = [
+//               "first": "maor",
+//               "last": "yadin",
+//               "age": 25,
+//               "email": username!,
+//               "id": uid!,
+//               "profilePicRef":FireBaseManager.getRef(path: "account/\(uid!)/profileImage.jpeg").fullPath
+//               ]
+//
+//               print("enter to add doc func")
+//
+//
+//        db.collection("Users").document(uid!).setData(docData,merge: true)
+//
+//    }
 
 }
 
