@@ -24,10 +24,10 @@ class SignInViewController: UIViewController {
             
             if(success){
                 print(success)
-            self.performSegue(withIdentifier: "showProfile", sender: sender)
+            self.performSegue(withIdentifier: "showProfileLogIn", sender: sender)
             }
             
-            self.shouldPerformSegue(withIdentifier: "showProfile", sender: sender)
+            self.shouldPerformSegue(withIdentifier: "showProfileLogIn", sender: sender)
 
         }
     }
@@ -35,28 +35,28 @@ class SignInViewController: UIViewController {
     
     @IBAction func createAccountButton_Click(_ sender: Any) {
         
-        FireBaseManager.CreateAccount(email: emailTF.text!, password: passwordTF.text!) {
-            (result:String) in
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "showProfile", sender: sender)
-            }
-        }
+        print("!!!!!")
+        performSegue(withIdentifier: "registerSegue", sender: self)
+//
+//        FireBaseManager.CreateAccount(email: emailTF.text!, password: passwordTF.text!) {
+//            (result:String) in
+//            DispatchQueue.main.async {
+//                self.performSegue(withIdentifier: "showProfile", sender: sender)
+//            }
+//        }
         
-    }
-    
-    func showPopOverView() {
-        if let mvc = UIStoryboard(name:)
     }
 
     
+
     override func shouldPerformSegue(withIdentifier: String, sender: Any?) -> Bool {
-        
-        if(withIdentifier == "showProfile") {
+
+        if(withIdentifier == "showProfileLogIn") {
             return false
         }
-        
+
         return true;
     }
-    
+
 
 }
