@@ -8,7 +8,10 @@
 
 import Foundation
 
-class UserData : NSObject {
+class UserData {
+    
+
+    
     var username:String = ""
     var first:String = ""
     var profilePicRef:String = ""
@@ -18,20 +21,8 @@ class UserData : NSObject {
     var uid:String = ""
 
     
-    func getUsername() -> String {
-        return first
-    }
-    
-    func getAge() -> String {
-        return first
-    }
-    
-    func getProfilePic() -> String {
-        return first
-    }
-    
-    
     init(first:String, last:String, profilePic:String, email:String, uid:String, age:String,username:String){
+        
         self.first = first
         self.last = last
         self.profilePicRef = profilePic
@@ -42,26 +33,24 @@ class UserData : NSObject {
 
     }
     
-    
-    
     init(json:[String:Any]){
-        self.email = json["email"] as! String;
-        self.first = json["first"] as! String;
-        self.last = json["last"] as! String;
-        self.profilePicRef = json["profilePicRef"] as! String;
-        self.uid = json["id"] as! String;
-        self.age = json["age"] as! String;
-        self.username = json["username"] as! String;
+        self.email = json["email"]! as! String;
+        self.first = json["first"]! as! String;
+        self.last = json["last"]! as! String;
+        self.profilePicRef = json["profilePicRef"]! as! String;
+        self.uid = json["uid"]! as! String;
+        self.age = json["age"]! as! String;
+        self.username = json["username"]! as! String;
         
     }
     
     func toJson() -> [String:Any] {
-        var json = [String:String]();
+        var json = [String:Any]();
         json["email"] = email
         json["first"] = first
         json["last"] = last
         json["profilePicRef"] = profilePicRef
-        json["id"] = uid
+        json["uid"] = uid
         json["age"] = age
         json["username"] = username
         
@@ -70,3 +59,4 @@ class UserData : NSObject {
     
     
 }
+
