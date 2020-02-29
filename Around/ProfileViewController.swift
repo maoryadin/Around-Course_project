@@ -13,19 +13,27 @@ import FirebaseDatabase
 
 
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDataSource {
+    
+    let queue = DispatchQueue.global()
     
 
+    @IBOutlet weak var tb: UITableView!
     var db:Firestore!
-    var userData:UserData!
+    var userData:UserData?
+       let cellId = "photoCell"
+    var products : [Product] = [Product]()
     
-    @IBOutlet weak var profileNameLabel: UILabel!
+    @IBOutlet weak var firstNameLabel: UILabel!
+    
+    @IBOutlet weak var lastNameLabel: UILabel!
     @IBOutlet weak var ProfileImageView: UIImageView!
-    @IBOutlet weak var tapToChangeProfileButton: UIButton!
+    
+    @IBOutlet weak var ageLabel: UILabel!
     
     var imagePicker:UIImagePickerController!
     var activityView:UIActivityIndicatorView!
-    var username = Auth.auth().currentUser?.email
+    var email = Auth.auth().currentUser?.email
     let uid = Auth.auth().currentUser?.uid
 
     
@@ -33,32 +41,21 @@ class ProfileViewController: UIViewController {
     
         override func viewDidLoad() {
         super.viewDidLoad()
-            
-            
-                        // [START setup]
-           let settings = FirestoreSettings()
-        
+            createProductArray()
+            tb.register(ProductCell.self, forCellReuseIdentifier: cellId)
+          let settings = FirestoreSettings()
           Firestore.firestore().settings = settings
-            // [END setup]
           db = Firestore.firestore()
-           // setDataFromDB()
-          //  addDoc()
 
-        
-        if let User = Auth.auth().currentUser {
-            profileNameLabel.text = User.email
-        }
+         //getDocumentAndSetData()
+            setData()
             
-         setProfileimage()
-
-        // Do any additional setup after loading the view.
-        
         let imageTap = UITapGestureRecognizer(target:self,action: #selector(openImagePicker))
         ProfileImageView.isUserInteractionEnabled = true
         ProfileImageView.addGestureRecognizer(imageTap)
         ProfileImageView.layer.cornerRadius = ProfileImageView.bounds.height / 2
         ProfileImageView.clipsToBounds = true
-        tapToChangeProfileButton.addTarget(self, action: #selector(openImagePicker), for: .touchUpInside)
+
                 
         imagePicker = UIImagePickerController()
           imagePicker.allowsEditing = true;
@@ -71,65 +68,122 @@ class ProfileViewController: UIViewController {
         self.present(imagePicker,animated: true,completion: nil)
     }
     
-    func setProfileimage() {
-        
-        let imageRef = FireBaseManager.getRef(path: "account/\(uid!)/profileImage.jpeg")
-        
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-            if error != nil {
-                print("error")
-            // Uh-oh, an error occurred!
-            return
-          } else {
-            // Data for "images/island.jpg" is returned
-                print("setting image")
-            self.ProfileImageView.image = UIImage(data: data!)
-          }
+    func setData() {
+        print("setting data in profile")
+        self.firstNameLabel.text = FireBaseManager.user?.first
+        self.lastNameLabel.text = FireBaseManager.user?.last
+        self.ageLabel.text = FireBaseManager.user?.age
+        let imageRef = FireBaseManager.getRef(path:FireBaseManager.user?.profilePicRef)
+         
+                         imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                             if error != nil {
+                                 print("error")
+                             return
+                           } else {
+                                 print("setting image")
+                             self.ProfileImageView.image = UIImage(data: data!)
+                                self.tb.reloadData()
+                           }
         }
     }
     
-    func setData() {
-        
-        user
-        
-        
-//       let docRef = db.collection("Users").document(uid!)
-//        docRef.getDocument { (document, error) in
-//            if let document = document, document.exists {
-//                let dataDescription = document.data()!
-//
-//
-//                for (key,value) in dataDescription.enumerated() {
-//                    print("\(key):\(value)")
-//
-//                }
-//
-//            } else {
-//                print("Document does not exist")
-//            }
-//        }
+    private func getDocumentAndSetData() {
+        //Get specific document from current user
+        let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+
+        // Get data
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data()
+                self.userData = UserData(json: dataDescription!)
+                self.firstNameLabel.text = self.userData?.first
+                self.lastNameLabel.text = self.userData?.last
+                self.ageLabel.text = self.userData?.age
+                let imageRef = FireBaseManager.getRef(path:self.userData?.profilePicRef)
+                
+                                imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                                    if error != nil {
+                                        print("error")
+                                    return
+                                  } else {
+                                        print("setting image")
+                                        self.ProfileImageView.image = UIImage(data: data!)
+                                        self.tb.reloadData()
+                                        let secondVC = self.tabBarController?.viewControllers![1] as! FeedViewController
+                                        
+                                        //secondVC.userData = self.userData
+                                  }
+                                }
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
-//    func addDoc() {
-//
-//
-//      let docData: [String: Any] = [
-//               "first": "maor",
-//               "last": "yadin",
-//               "age": 25,
-//               "email": username!,
-//               "id": uid!,
-//               "profilePicRef":FireBaseManager.getRef(path: "account/\(uid!)/profileImage.jpeg").fullPath
-//               ]
-//
-//               print("enter to add doc func")
-//
-//
-//        db.collection("Users").document(uid!).setData(docData,merge: true)
-//
-//    }
+       override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+        }
+        
+        
+         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ProductCell
+        let currentLastItem = PostManager.posts[indexPath.row]
+            cell.post = currentLastItem
+        return cell
+        }
+        
+        
+         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return PostManager.posts.count
+        }
+        
+        func tableView(_ tableView: UITableView,
+                       heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 100
+        }
 
+        func createProductArray() {
+            
+              let docRef = Firestore.firestore().collection(FireBaseManager.user!.uid)
+//            docRef.getDocuments() { (querySnapshot, err) in
+//                if let err = err {
+//                    print("Error getting documents: \(err)")
+//                } else {
+//                    for document in querySnapshot!.documents {
+//                        let data = document.data()
+//                        PostManager.posts.append(Post(json: data))
+//                    }
+//                }
+//            }
+            
+
+            docRef.addSnapshotListener {doc,err in
+                print("listener !")
+                PostManager.posts.removeAll()
+                for document in doc!.documents {
+                    let data = document.data()
+                    PostManager.posts.append(Post(json: data))
+                }
+                self.tb.reloadData()
+
+            }
+            
+//            docRef.getDocuments() { (querySnapshot, err) in
+//                if let err = err {
+//                    print("Error getting documents: \(err)")
+//                } else {
+//                    for document in querySnapshot!.documents {
+//                        let data = document.data()
+//                        PostManager.posts.append(Post(json: data))
+//                    }
+//                }
+//            }
+
+           }
+    
+
+    
 }
 
 
@@ -137,26 +191,32 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     //check if image picker has been canceled
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+
         picker.dismiss(animated: true, completion: nil)
     }
     
     //image picker controller
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
+
         if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             self.ProfileImageView.image = pickedImage
         }
         picker.dismiss(animated: true, completion: nil)
         
-        print("a new photo has been choosed")
+
         
         if let data = self.ProfileImageView.image?.jpegData(compressionQuality: 0.75) {
-            
-            let ref = FireBaseManager.getRef(path: "account/\(uid!)/profileImage.jpeg")
-            FireBaseManager.uploadFile(data: data, ref: ref)
-            
-        }
-        
-    }
+
+
+            let ref = FireBaseManager.getRef(path: FireBaseManager.user?.profilePicRef)
+
+//            FireBaseManager.uploadFile(data: data, ref: ref, completion: getDocumentAndSetData)
     
+            FireBaseManager.uploadFile(data: data, ref: ref,completion: setData)
+
+
+                
+            }
+        }
+
 }
