@@ -16,6 +16,7 @@ class FireBaseManager: NSObject {
     static let databaseRef = Database.database().reference()
     static var currentUserId:String = ""
     static var currentUser:User? = nil
+    static var user:UserData?
 
     static func Login(email:String,password:String, completion:
         @escaping (_ success:Bool) -> Void) {
@@ -28,6 +29,16 @@ class FireBaseManager: NSObject {
                             } else {
                                 currentUser = user?.user
                                 currentUserId = (((user?.user.uid)!))
+                                //Get specific document from current user
+                                let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+
+                                // Get data
+                                docRef.getDocument { (document, error) in
+                                    if let document = document, document.exists {
+                                        let dataDescription = document.data()
+                                        self.user = UserData(json: dataDescription!)
+                                    }
+                                }
                                 completion(true)
                             }
                             
@@ -44,13 +55,13 @@ class FireBaseManager: NSObject {
                     print(error.localizedDescription)
                         return
                     }
-            
-            Login(email: email, password: password) {
-                (success:Bool) in
-                if(success) {
-                    print("login successfull")
-                } else {
-                    print("login unsuccessfull")
+            let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+
+            // Get data
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data()
+                    self.user = UserData(json: dataDescription!)
                 }
             }
             completion("")
@@ -72,21 +83,30 @@ class FireBaseManager: NSObject {
             return storageRef
         }
         let pathRef = storageRef.child(path!)
+        print("path:\(pathRef.fullPath)")
         return pathRef
         
         
     }
     
-    static func uploadFile(data:Data,ref:StorageReference) {
+    static func uploadFile(data:Data,ref:StorageReference,completion: (()->(Void))?) {
         
+        print(ref.fullPath)
         _ = ref.putData(data, metadata: nil) { (metadata, error) in
             guard metadata != nil else {
           // Uh-oh, an error occurred!
+                print("error upload file")
           return
         }
+           
+            guard completion != nil  else {
+                print("upload complete with nil")
+                return
+            }
+            
+            completion!()
     }
-    
-        }
+}
     
 
 }
