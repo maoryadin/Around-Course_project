@@ -29,6 +29,9 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var lastNameField: UITextField!
     
+    var imageView = UIImageView()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,24 +50,24 @@ class RegisterViewController: UIViewController {
             
             FireBaseManager.CreateAccount(email: emailField.text!, password: passwordField.text!) {
                         (result:String) in
-                        DispatchQueue.main.async {
-
-
+                DispatchQueue.main.async{
+                    FireBaseManager.Login(email: self.emailField.text!, password: self.passwordField.text!) { (success:Bool) in
+                        
+                        if(success){
+                            print("success login from register")
                             self.addUserDetails()
-                            self.performSegue(withIdentifier: "showProfileRegister", sender: sender)
+
                         }
                     }
+            }
+            }
         }
 
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.destination is ProfileViewController {
-            
-            let vc = segue.destination as? ProfileViewController
-            vc?.userData = myUser
-        }
+
         
     }
     
@@ -76,26 +79,36 @@ class RegisterViewController: UIViewController {
     func addUserDetails() {
 
         let uid = Auth.auth().currentUser?.uid
-        if uid != nil {
+        print(uid!)
 
-//            let docData: [String: Any] = [
-//              "first": firstNameField.text!,
-//              "last": lastNameField.text!,
-//                     "age":  ageField.text!,
-//                     "email": emailField.text!,
-//                     "id": uid!,
-//                     "profilePicRef":"empty"
-//                     ]
+
+        imageView.image = UIImage(named:"profileImage")
+    
+        print("compressing image..")
+        if let data = self.imageView.image?.jpegData(compressionQuality: 0.75) {
+    
+            print("profile image is compressed")
+              let ref = FireBaseManager.getRef(path: "account/\(uid!)/profileImage.jpeg")
+            FireBaseManager.uploadFile(data: data, ref: ref,completion: {})
             
-            myUser = UserData(first: firstNameField.text!, last: lastNameField.text!, profilePic: "", email: emailField.text!, uid: uid!, age: ageField.text!)
+            myUser = UserData(first: firstNameField.text!, last: lastNameField.text!, profilePic: ref.fullPath, email: emailField.text!, uid: uid!, age: ageField.text!,username: usernameField.text!)
 
-                  //   print("enter to add doc func")
+                      //   print("enter to add doc func")
 
+            db.collection("Users").document(uid!).setData(myUser.toJson(), merge: true) { (Error) in
+                self.performSegue(withIdentifier: "profileSegue", sender: self)
 
-            db.collection("Users").document(uid!).setData(myUser.toJson(),merge: true)
+            }
+//            db.collection("Users").document(uid!).setData(myUser.toJson(),merge: true,completion: {
+//                self.performSegue(withIdentifier: "profileSegue", sender: self)
+//            })
             
-
+            print("collection is created")
         }
+
+            
+        
+    
         
     }
     
