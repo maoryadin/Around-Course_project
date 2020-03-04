@@ -10,20 +10,30 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import CoreLocation
 
 class addPostViewController: UIViewController {
 
     var post:Post?
     var db:Firestore!
     
+    let locationManager = CLLocationManager()
     @IBOutlet weak var imageView: UIImageView!
     var imagePicker:UIImagePickerController!
     var activityView:UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.requestWhenInUseAuthorization()
+        
+        if(CLLocationManager.locationServicesEnabled()) {
+            locationManager.delegate = self as? CLLocationManagerDelegate
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+        
          let settings = FirestoreSettings()
-        post = Post(uid: FireBaseManager.user!.uid,username: "", text: "",imageRef: "", time: "")
+        post = Post(uid: FireBaseManager.user!.uid,username: "", text: "",imageRef: "", time: "",lat: 0,long: 0)
 
         Firestore.firestore().settings = settings
           // [END setup]
@@ -41,7 +51,11 @@ class addPostViewController: UIViewController {
           imagePicker.sourceType = .photoLibrary
           imagePicker.delegate = self
     }
+    
+    
+    
     @objc func openImagePicker(_ sender:Any) {
+        locationManager.startUpdatingLocation()
           self.present(imagePicker,animated: true,completion: nil)
       }
     
@@ -49,18 +63,27 @@ class addPostViewController: UIViewController {
     
 
      @IBAction func PostActionButtom_clicked(_ sender: Any) {
+        
+        let loc =  locationManager.location
+        //loc?.distance(from: <#T##CLLocation#>)
+        let lat = loc!.coordinate.latitude.advanced(by: 0)
+        let long = loc!.coordinate.longitude.advanced(by: 0)
+        //self.locationManager.stopUpdatingLocation()
         let currentDate = NSDate.now
-        post?.text = textPostField.text!
+        post?.text = "\(textPostField.text!) \(lat),\(long)"
         post?.username = FireBaseManager.user!.username
         post?.time = currentDate.timeIntervalSince1970.description
         post?.imageRef = ("account/\(post!.uid)/posts/\(post!.time)/postImage.jpeg")
-
+        post?.lat = lat
+        post?.long = long
                 if let data = self.imageView.image?.jpegData(compressionQuality: 0.75) {
             
                     print("profile image is compressed")
                     let ref = FireBaseManager.getRef(path: post?.imageRef)
-                    FireBaseManager.uploadFile(data: data, ref: ref,completion: {})
-                    db.collection(post!.uid).document(post!.time).setData((post!.toJson()), merge: false, completion: nil)
+                    FireBaseManager.uploadFile(data: data, ref: ref,completion: {
+                        self.db.collection("Posts").document("\(self.post!.uid)_\(self.post!.time)").setData((self.post!.toJson()), merge: false, completion: nil)
+})
+                
 
                     }
                     
@@ -101,7 +124,6 @@ extension addPostViewController: UIImagePickerControllerDelegate, UINavigationCo
 //
 //
 //
-                
                 
             }
         }
