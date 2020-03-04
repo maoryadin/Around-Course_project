@@ -243,26 +243,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEZ-dO-gQF">
-                                <rect key="frame" x="159" y="704" width="31" height="30"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0C-FH-idw">
+                                <rect key="frame" x="87" y="65" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEZ-dO-gQF">
+                                <rect key="frame" x="193" y="477" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Post"/>
                                 <connections>
                                     <action selector="PostActionButtom_clicked:" destination="6g6-nS-hf8" eventType="touchUpInside" id="8cI-Rg-QtF"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0C-FH-idw">
-                                <rect key="frame" x="87" y="65" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="7oe-W0-OQP" firstAttribute="trailing" secondItem="0ZR-fe-3Ff" secondAttribute="trailing" constant="71" id="0W5-6L-RoO"/>
-                            <constraint firstItem="DEZ-dO-gQF" firstAttribute="top" secondItem="0ZR-fe-3Ff" secondAttribute="bottom" constant="18" id="3Uz-dP-G23"/>
-                            <constraint firstItem="DEZ-dO-gQF" firstAttribute="leading" secondItem="7oe-W0-OQP" secondAttribute="leading" constant="159" id="KHE-w5-cy5"/>
                             <constraint firstItem="0ZR-fe-3Ff" firstAttribute="leading" secondItem="7oe-W0-OQP" secondAttribute="leading" constant="73" id="Zaa-YU-Zsu"/>
                             <constraint firstItem="0ZR-fe-3Ff" firstAttribute="top" secondItem="7oe-W0-OQP" secondAttribute="top" constant="652" id="acx-I8-W2s"/>
-                            <constraint firstItem="7oe-W0-OQP" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DEZ-dO-gQF" secondAttribute="trailing" symbolic="YES" id="onh-p3-wJ6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7oe-W0-OQP"/>
                     </view>
@@ -285,9 +283,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LA3-Ty-LHd">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="photoCell" rowHeight="691" id="fTD-Wb-v5E">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="691"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fTD-Wb-v5E" id="k0q-Za-qVq">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="691"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="3It-rR-I3M" id="JS1-qN-ixh"/>
                                 </connections>
@@ -297,6 +305,9 @@
                         <viewLayoutGuide key="safeArea" id="ACF-OL-oYc"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="feed" id="x8Y-Vr-wOH"/>
+                    <connections>
+                        <outlet property="tb" destination="LA3-Ty-LHd" id="K98-g4-4eH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NMV-DG-71n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
