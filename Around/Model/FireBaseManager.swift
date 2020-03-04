@@ -83,7 +83,7 @@ class FireBaseManager: NSObject {
             return storageRef
         }
         let pathRef = storageRef.child(path!)
-        print("path:\(pathRef.fullPath)")
+        //print("path:\(pathRef.fullPath)")
         return pathRef
         
         
@@ -91,7 +91,7 @@ class FireBaseManager: NSObject {
     
     static func uploadFile(data:Data,ref:StorageReference,completion: (()->(Void))?) {
         
-        print(ref.fullPath)
+        //print(ref.fullPath)
         _ = ref.putData(data, metadata: nil) { (metadata, error) in
             guard metadata != nil else {
           // Uh-oh, an error occurred!
