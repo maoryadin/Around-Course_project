@@ -19,8 +19,7 @@ class ProductCell : UITableViewCell {
                         self.productImage.image = image
                         self.productNameLabel.text = self.post!.username
                         self.productDescriptionLabel.text = self.post!.text
-                        print(self.post!.username)
-                        print(self.post!.text)
+
                         
                   }
                 }
