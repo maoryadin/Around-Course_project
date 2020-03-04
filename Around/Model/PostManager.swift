@@ -50,13 +50,17 @@ class Post {
     var text:String = ""
     var imageRef: String = ""
     var time:String = ""
+    var lat:Double = 0
+    var long:Double = 0
     
-    init(uid:String,username:String,text:String,imageRef:String,time:String) {
+    init(uid:String,username:String,text:String,imageRef:String,time:String,lat:Double,long:Double) {
         self.uid = uid
         self.username = username
         self.text = text
         self.imageRef = imageRef
         self.time = time
+        self.lat = lat
+        self.long = long
     }
     init(json:[String:Any]){
         
@@ -65,6 +69,8 @@ class Post {
         self.text = json["text"]! as! String;
         self.imageRef = json["imageRef"]! as! String;
         self.time = json["time"]! as! String;
+        self.lat = json["lat"]! as! Double;
+        self.long = json["long"]! as! Double;
 
         
     }
@@ -75,6 +81,9 @@ class Post {
         json["text"] = text
         json["imageRef"] = imageRef
         json["time"] = time
+        json["lat"] = lat
+        json["long"] = long
+        
         
         return json;
     }
