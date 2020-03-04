@@ -65,9 +65,7 @@ class SignInViewController: UIViewController {
                      if let document = document, document.exists {
                          let dataDescription = document.data()!
 
-                       for(key,value) in dataDescription.enumerated() {
-                           print("\(key):\(value)")
-                       }
+
                        
                         self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
             }
