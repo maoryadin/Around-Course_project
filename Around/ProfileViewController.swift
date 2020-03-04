@@ -86,39 +86,39 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
                            }
         }
     }
-    
-    private func getDocumentAndSetData() {
-        //Get specific document from current user
-        let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
-
-        // Get data
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data()
-                self.userData = UserData(json: dataDescription!)
-                self.firstNameLabel.text = self.userData?.first
-                self.lastNameLabel.text = self.userData?.last
-                self.ageLabel.text = self.userData?.age
-                let imageRef = FireBaseManager.getRef(path:self.userData?.profilePicRef)
-                
-                                imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                                    if error != nil {
-                                        print("error")
-                                    return
-                                  } else {
-                                        print("setting image")
-                                        self.ProfileImageView.image = UIImage(data: data!)
-                                        self.tb.reloadData()
-                                        let secondVC = self.tabBarController?.viewControllers![1] as! FeedViewController
-                                        
-                                        //secondVC.userData = self.userData
-                                  }
-                                }
-            } else {
-                print("Document does not exist")
-            }
-        }
-    }
+//
+//    private func getDocumentAndSetData() {
+//        //Get specific document from current user
+//        let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+//
+//        // Get data
+//        docRef.getDocument { (document, error) in
+//            if let document = document, document.exists {
+//                let dataDescription = document.data()
+//                self.userData = UserData(json: dataDescription!)
+//                self.firstNameLabel.text = self.userData?.first
+//                self.lastNameLabel.text = self.userData?.last
+//                self.ageLabel.text = self.userData?.age
+//                let imageRef = FireBaseManager.getRef(path:self.userData?.profilePicRef)
+//
+//                                imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//                                    if error != nil {
+//                                        print("error")
+//                                    return
+//                                  } else {
+//                                        print("setting image")
+//                                        self.ProfileImageView.image = UIImage(data: data!)
+//                                        self.tb.reloadData()
+//                                        let secondVC = self.tabBarController?.viewControllers![1] as! FeedViewController
+//
+//                                        //secondVC.userData = self.userData
+//                                  }
+//                                }
+//            } else {
+//                print("Document does not exist")
+//            }
+//        }
+//    }
     
        override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -145,40 +145,23 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
 
         func createProductArray() {
             
-              let docRef = Firestore.firestore().collection(FireBaseManager.user!.uid)
-//            docRef.getDocuments() { (querySnapshot, err) in
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//                } else {
-//                    for document in querySnapshot!.documents {
-//                        let data = document.data()
-//                        PostManager.posts.append(Post(json: data))
-//                    }
-//                }
-//            }
+            let docRef = Firestore.firestore().collection("Posts")
             
-
+//                    db.collection("Posts").document("\(post!.uid)_\(post!.time)").setData((post!.toJson()), merge: false, completion: nil)
             docRef.addSnapshotListener {doc,err in
                 print("listener !")
                 PostManager.posts.removeAll()
                 for document in doc!.documents {
                     let data = document.data()
-                    PostManager.posts.append(Post(json: data))
+                    let p = Post(json: data)
+                    if(p.uid == Auth.auth().currentUser?.uid){
+                        PostManager.posts.append(Post(json: data))
+                    }
                 }
                 self.tb.reloadData()
 
             }
             
-//            docRef.getDocuments() { (querySnapshot, err) in
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//                } else {
-//                    for document in querySnapshot!.documents {
-//                        let data = document.data()
-//                        PostManager.posts.append(Post(json: data))
-//                    }
-//                }
-//            }
 
            }
     
