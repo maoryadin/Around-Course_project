@@ -7,7 +7,7 @@ target 'Around' do
 
   # Pods for Around
 
-  pod  'Firebase/Auth'
+  pod 'Firebase/Auth'
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
   pod 'GoogleSignIn'
