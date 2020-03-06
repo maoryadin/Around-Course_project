@@ -30,9 +30,9 @@ class FeedViewController: UIViewController, UITableViewDataSource, CLLocationMan
         tb.register(ProductCell.self, forCellReuseIdentifier: cellId)
         locationManager.requestWhenInUseAuthorization()
         if(CLLocationManager.locationServicesEnabled()) {
-            locationManager.delegate = self as? CLLocationManagerDelegate
+            locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.distanceFilter = 1
+            locationManager.distanceFilter = 100
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
             createProductArray()
@@ -79,13 +79,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, CLLocationMan
             for document in doc!.documents {
                 print("listener !")
                 let data = document.data()
-                let post = Post(json:data)
-                let postLocation = CLLocation(latitude: post.lat, longitude: post.long)
+                let postLocation = CLLocation(latitude: data["lat"]! as! Double, longitude: data["long"]! as! Double)
+                let distanceInMeters = self.locationManager.location!.distance(from: postLocation) // result is in meters
 
-                print("lat:\(post.lat), long:\(post.long)")
-                print(self.locationManager.location!.distance(from: postLocation).advanced(by: 0))
-                if(self.locationManager.location!.distance(from: postLocation).advanced(by: 0) <= 20.0){
-                    
+                print("latt:\(data["lat"]!), longg:\(data["long"]!)")
+                print(distanceInMeters)
+                if((distanceInMeters) <= 100.0){
+                    let post = Post(json:data)
+
                    // print(self.locationManager.location!.distance(from: postLocation).advanced(by: 0))
                     print("adding post")
                             self.feedPosts.append(post)
@@ -102,7 +103,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, CLLocationMan
             
           
         }
-        //self.tb.reloadData()
+        self.tb.reloadData()
 
        }
 }

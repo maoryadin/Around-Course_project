@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import CoreLocation
 
-class addPostViewController: UIViewController {
+class addPostViewController: UIViewController, CLLocationManagerDelegate {
 
     var post:Post?
     var db:Firestore!
@@ -27,7 +27,7 @@ class addPostViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         
         if(CLLocationManager.locationServicesEnabled()) {
-            locationManager.delegate = self as? CLLocationManagerDelegate
+            locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
@@ -42,7 +42,7 @@ class addPostViewController: UIViewController {
         let imageTap = UITapGestureRecognizer(target:self,action: #selector(openImagePicker))
           imageView.isUserInteractionEnabled = true
           imageView.addGestureRecognizer(imageTap)
-          imageView.layer.cornerRadius = imageView.bounds.height / 2
+          //imageView.layer.cornerRadius = imageView.bounds.height / 2
           imageView.clipsToBounds = true
 
                   
@@ -55,7 +55,7 @@ class addPostViewController: UIViewController {
     
     
     @objc func openImagePicker(_ sender:Any) {
-        locationManager.startUpdatingLocation()
+        //locationManager.startUpdatingLocation()
           self.present(imagePicker,animated: true,completion: nil)
       }
     
@@ -66,8 +66,8 @@ class addPostViewController: UIViewController {
         
         let loc =  locationManager.location
         //loc?.distance(from: <#T##CLLocation#>)
-        let lat = loc!.coordinate.latitude.advanced(by: 0)
-        let long = loc!.coordinate.longitude.advanced(by: 0)
+        let lat = loc!.coordinate.latitude
+        let long = loc!.coordinate.longitude
         //self.locationManager.stopUpdatingLocation()
         let currentDate = NSDate.now
         post?.text = "\(textPostField.text!) \(lat),\(long)"
@@ -115,7 +115,7 @@ extension addPostViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         print("a new photo has been choosed")
         
-        if let data = self.imageView.image?.jpegData(compressionQuality: 0.75) {
+        if (self.imageView.image?.jpegData(compressionQuality: 0.75)) != nil {
             
 //            let ref = FireBaseManager.getRef(path: userData?.profilePicRef)
 ////            FireBaseManager.uploadFile(data: data, ref: ref, completion: getDocumentAndSetData)
