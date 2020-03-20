@@ -14,13 +14,13 @@ import CoreLocation
 
 class FeedViewController: UIViewController, UITableViewDataSource, CLLocationManagerDelegate {
     
-    let semaphore = DispatchSemaphore(value: 1)
+    //let semaphore = DispatchSemaphore(value: 1)
 
     var db:Firestore!
     let cellId = "photoCell"
     var products : [Product] = [Product]()
     var feedPosts = [Post]()
-    let locationManager = CLLocationManager()
+    //let locationManager = CLLocationManager()
     var docRef:CollectionReference?
     @IBOutlet weak var tb: UITableView!
 
@@ -28,28 +28,49 @@ class FeedViewController: UIViewController, UITableViewDataSource, CLLocationMan
         super.viewDidLoad()
         docRef = Firestore.firestore().collection("Posts")
         tb.register(ProductCell.self, forCellReuseIdentifier: cellId)
-        locationManager.requestWhenInUseAuthorization()
-        if(CLLocationManager.locationServicesEnabled()) {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.distanceFilter = 100
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
+//        locationManager.requestWhenInUseAuthorization()
+//        if(CLLocationManager.locationServicesEnabled()) {
+//            locationManager.delegate = self
+        LocationService.sharedInstance.locationManager.delegate = self
+//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//            locationManager.distanceFilter = 1
+//            locationManager.requestWhenInUseAuthorization()
+//            locationManager.startUpdatingLocation()
             createProductArray()
-
-        }
+//
+//        }
 
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        LocationService.sharedInstance.locationManager.delegate = self
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        LocationService.sharedInstance.locationManager.delegate = LocationService.sharedInstance.self
+    }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("new location !")
         //semaphore.signal()
-
-        createProductArray()
+        
+        if let newLocation = locations.last{
+            print("(\(newLocation.coordinate.latitude), \(newLocation.coordinate.latitude))")
+            
+            var locationAdded: Bool
+            locationAdded = LocationService.sharedInstance.filterAndAddLocation(newLocation)
+            
+            
+            if locationAdded{
+                LocationService.sharedInstance.notifiyDidUpdateLocation(newLocation: newLocation)
+                createProductArray()
+            }
+            
+        }
+        //createProductArray()
         //manager.stopUpdatingLocation()
 
     }
@@ -59,8 +80,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, CLLocationMan
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ProductCell
-        let currentLastItem = feedPosts[indexPath.row]
-            cell.post = currentLastItem
+        //let currentLastItem = feedPosts[indexPath.row]
+            cell.post = feedPosts[indexPath.row]
         return cell
     }
     
@@ -80,11 +101,11 @@ class FeedViewController: UIViewController, UITableViewDataSource, CLLocationMan
                 print("listener !")
                 let data = document.data()
                 let postLocation = CLLocation(latitude: data["lat"]! as! Double, longitude: data["long"]! as! Double)
-                let distanceInMeters = self.locationManager.location!.distance(from: postLocation) // result is in meters
+                let distanceInMeters = LocationService.sharedInstance.locationManager.location!.distance(from: postLocation) // result is in meters
 
                 print("latt:\(data["lat"]!), longg:\(data["long"]!)")
                 print(distanceInMeters)
-                if((distanceInMeters) <= 100.0){
+                if((distanceInMeters) <= 50.0){
                     let post = Post(json:data)
 
                    // print(self.locationManager.location!.distance(from: postLocation).advanced(by: 0))

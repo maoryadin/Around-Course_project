@@ -24,13 +24,13 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.requestWhenInUseAuthorization()
-        
-        if(CLLocationManager.locationServicesEnabled()) {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-        }
+//        locationManager.requestWhenInUseAuthorization()
+//
+//        if(CLLocationManager.locationServicesEnabled()) {
+//            locationManager.delegate = self
+//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//            locationManager.startUpdatingLocation()
+//        }
         
          let settings = FirestoreSettings()
         post = Post(uid: FireBaseManager.user!.uid,username: "", text: "",imageRef: "", time: "",lat: 0,long: 0)
@@ -64,13 +64,13 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
 
      @IBAction func PostActionButtom_clicked(_ sender: Any) {
         
-        let loc =  locationManager.location
+        let loc =  LocationService.sharedInstance.locationManager.location
         //loc?.distance(from: <#T##CLLocation#>)
         let lat = loc!.coordinate.latitude
         let long = loc!.coordinate.longitude
         //self.locationManager.stopUpdatingLocation()
         let currentDate = NSDate.now
-        post?.text = "\(textPostField.text!) \(lat),\(long)"
+        post?.text = "\(textPostField.text!)"
         post?.username = FireBaseManager.user!.username
         post?.time = currentDate.timeIntervalSince1970.description
         post?.imageRef = ("account/\(post!.uid)/posts/\(post!.time)/postImage.jpeg")

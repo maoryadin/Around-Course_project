@@ -316,18 +316,19 @@
         <!--around-->
         <scene sceneID="DEd-R2-59V">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Dwv-qq-w5k" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="B9V-A3-ilZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="PEF-d9-Gtm"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="around" id="pDP-dH-KBs"/>
-                </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7a-7t-O0V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController modalPresentationStyle="fullScreen" id="Dwv-qq-w5k" customClass="AroundViewController" customModule="Around" customModuleProvider="target" sceneMemberID="viewController">
+                    <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="srF-tu-Eh7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </mapView>
+                    <tabBarItem key="tabBarItem" title="around" id="pDP-dH-KBs"/>
+                    <connections>
+                        <outlet property="mapView" destination="srF-tu-Eh7" id="OTQ-89-vbU"/>
+                    </connections>
+                </viewController>
             </objects>
-            <point key="canvasLocation" x="886" y="594"/>
+            <point key="canvasLocation" x="885.50724637681162" y="593.97321428571422"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ecm-UF-k9V">
