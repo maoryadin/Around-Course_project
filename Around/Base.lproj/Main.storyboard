@@ -227,9 +227,11 @@
                     <tabBarItem key="tabBarItem" title="profile" id="gg2-54-cQh"/>
                     <connections>
                         <outlet property="ProfileImageView" destination="65l-iP-hOJ" id="TYl-BY-Rk6"/>
+                        <outlet property="addPostBtn" destination="od4-VJ-Smh" id="ygi-ab-v3A"/>
                         <outlet property="ageLabel" destination="txT-og-L03" id="EmE-rH-7d5"/>
                         <outlet property="firstNameLabel" destination="81o-cJ-j0q" id="0Re-g3-t1B"/>
                         <outlet property="lastNameLabel" destination="UNJ-ac-e5p" id="pLn-A9-vHf"/>
+                        <outlet property="signOutBtn" destination="6mm-Co-BfH" id="l8Y-cU-684"/>
                         <outlet property="tb" destination="9eP-iW-shG" id="W4F-u8-T16"/>
                     </connections>
                 </viewController>

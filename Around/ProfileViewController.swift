@@ -14,10 +14,10 @@ import Kingfisher
 import CoreLocation
 
 class ProfileViewController: UIViewController {
+    @IBOutlet weak var addPostBtn: UIBarButtonItem!
     
-    let queue = DispatchQueue.global()
+    @IBOutlet weak var signOutBtn: UIBarButtonItem!
     
-
     @IBOutlet weak var tb: UITableView!
     var db:Firestore!
     var userData:UserData?
@@ -42,6 +42,8 @@ class ProfileViewController: UIViewController {
     
         override func viewDidLoad() {
         super.viewDidLoad()
+addPostBtn.image?.withRenderingMode(.alwaysOriginal)
+signOutBtn.image?.withRenderingMode(.alwaysOriginal)
             db = Firestore.firestore()
             let settings = FirestoreSettings()
             PostManager.posts.append(contentsOf: Post.getAllPostsFromDb())
