@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07EFD874616CDE1A11D0B230 /* Pods_Around.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6B94DEA20A4AA9F128908C /* Pods_Around.framework */; };
+		7532189424293284003C0462 /* Posts + Sql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532189324293284003C0462 /* Posts + Sql.swift */; };
+		7575F4E02427A65D00764B77 /* ModelSql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7575F4DF2427A65D00764B77 /* ModelSql.swift */; };
+		7575F4E22427AAD600764B77 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7575F4E12427AAB200764B77 /* libsqlite3.0.tbd */; };
+		75B104B1242D1ED3009CCC0A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B104B0242D1ED3009CCC0A /* Model.swift */; };
 		BC151A2F2402A26D005CCCB0 /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC151A2E2402A26D005CCCB0 /* FireStoreManager.swift */; };
 		BC173D8423FC253100A21104 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC173D8323FC253100A21104 /* RegisterViewController.swift */; };
 		BC1E7C8E23FEB44000A13948 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1E7C8D23FEB44000A13948 /* FeedViewController.swift */; };
 		BC28C8FD2405808500ECF857 /* extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC28C8FC2405808500ECF857 /* extention.swift */; };
 		BC28C8FF2405824000ECF857 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC28C8FE2405824000ECF857 /* ProductCell.swift */; };
+		BC54D0222445E28F00921363 /* PopUpPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54D0212445E28F00921363 /* PopUpPostViewController.swift */; };
 		BC56093C23D1C01B003DC8FD /* FireBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC56093B23D1C01B003DC8FD /* FireBaseManager.swift */; };
 		BC5D28B023FD4A9F00D76D24 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5D28AF23FD4A9F00D76D24 /* UserData.swift */; };
 		BC723CA22412A0BC00184B05 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC723CA02412A07C00184B05 /* CoreLocation.framework */; };
@@ -21,14 +25,19 @@
 		BC723CAB2412A86800184B05 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC723CAA2412A86800184B05 /* MapKit.framework */; };
 		BC723CAF2412B7A900184B05 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC723CAE2412B7A900184B05 /* UserAnnotation.swift */; };
 		BC84B7B023F98BFD001A5EBF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC84B7AF23F98BFD001A5EBF /* ProfileViewController.swift */; };
+		BC95F6B32439EC8600B77377 /* UItoast.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC95F6B22439EC8600B77377 /* UItoast.swift */; };
 		BCA7EBA224222B1400BC3A69 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7EBA124222B1400BC3A69 /* DBManager.swift */; };
+		BCB324FD243608670044E5AD /* User + Sql.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB324FC243608670044E5AD /* User + Sql.swift */; };
 		BCB7782D2413F53A00F3617F /* UiColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB7782C2413F53A00F3617F /* UiColor+Hex.swift */; };
 		BCB77831241417FA00F3617F /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB77830241417FA00F3617F /* Artwork.swift */; };
 		BCB778332414234B00F3617F /* ArtworkViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB778322414234B00F3617F /* ArtworkViews.swift */; };
-		BCC352BA240D417E00FA1D4E /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BCC352BA240D417E00FA1D4E /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BCCBE1A22403F91C00951426 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBE1A12403F91C00951426 /* PostManager.swift */; };
 		BCCBE1A42404022C00951426 /* addPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBE1A32404022C00951426 /* addPostViewController.swift */; };
+		BCDC50B22435EE9C0099E6C2 /* UIimage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDC50B12435EE9C0099E6C2 /* UIimage + Extension.swift */; };
 		BCDF913C240572CD002977B1 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDF913B240572CD002977B1 /* Product.swift */; };
+		BCE092B72441F7F000BD4730 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE092B62441F7F000BD4730 /* Service.swift */; };
+		DE7FB334F579BC3E1AE8ECB9 /* Pods_Around.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6B94DEA20A4AA9F128908C /* Pods_Around.framework */; };
 		E457EA8E23A800B4000A7DE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E457EA8D23A800B4000A7DE7 /* AppDelegate.swift */; };
 		E457EA9023A800B4000A7DE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E457EA8F23A800B4000A7DE7 /* SceneDelegate.swift */; };
 		E457EA9523A800B4000A7DE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E457EA9323A800B4000A7DE7 /* Main.storyboard */; };
@@ -46,7 +55,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BCC352BA240D417E00FA1D4E /* BuildFile in Embed Frameworks */,
+				BCC352BA240D417E00FA1D4E /* (null) in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,12 +64,18 @@
 
 /* Begin PBXFileReference section */
 		284D865E8E08931ADF8C94F8 /* Pods-Around.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Around.debug.xcconfig"; path = "Target Support Files/Pods-Around/Pods-Around.debug.xcconfig"; sourceTree = "<group>"; };
+		7532189324293284003C0462 /* Posts + Sql.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Posts + Sql.swift"; sourceTree = "<group>"; };
+		7575F4DF2427A65D00764B77 /* ModelSql.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSql.swift; sourceTree = "<group>"; };
+		7575F4E12427AAB200764B77 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		7575F4E32427ABFE00764B77 /* Around-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Around-Bridging-Header.h"; sourceTree = "<group>"; };
+		75B104B0242D1ED3009CCC0A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		AF762B1DC884733B41F1C6C3 /* Pods-Around.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Around.release.xcconfig"; path = "Target Support Files/Pods-Around/Pods-Around.release.xcconfig"; sourceTree = "<group>"; };
 		BC151A2E2402A26D005CCCB0 /* FireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreManager.swift; sourceTree = "<group>"; };
 		BC173D8323FC253100A21104 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		BC1E7C8D23FEB44000A13948 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		BC28C8FC2405808500ECF857 /* extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extention.swift; sourceTree = "<group>"; };
 		BC28C8FE2405824000ECF857 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		BC54D0212445E28F00921363 /* PopUpPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPostViewController.swift; sourceTree = "<group>"; };
 		BC56093B23D1C01B003DC8FD /* FireBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseManager.swift; sourceTree = "<group>"; };
 		BC5D28AF23FD4A9F00D76D24 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		BC723CA02412A07C00184B05 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -69,13 +84,17 @@
 		BC723CAA2412A86800184B05 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		BC723CAE2412B7A900184B05 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		BC84B7AF23F98BFD001A5EBF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BC95F6B22439EC8600B77377 /* UItoast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UItoast.swift; sourceTree = "<group>"; };
 		BCA7EBA124222B1400BC3A69 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		BCB324FC243608670044E5AD /* User + Sql.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User + Sql.swift"; sourceTree = "<group>"; };
 		BCB7782C2413F53A00F3617F /* UiColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiColor+Hex.swift"; sourceTree = "<group>"; };
 		BCB77830241417FA00F3617F /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		BCB778322414234B00F3617F /* ArtworkViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkViews.swift; sourceTree = "<group>"; };
 		BCCBE1A12403F91C00951426 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		BCCBE1A32404022C00951426 /* addPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addPostViewController.swift; sourceTree = "<group>"; };
+		BCDC50B12435EE9C0099E6C2 /* UIimage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIimage + Extension.swift"; sourceTree = "<group>"; };
 		BCDF913B240572CD002977B1 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		BCE092B62441F7F000BD4730 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		CD6B94DEA20A4AA9F128908C /* Pods_Around.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Around.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E457EA8A23A800B4000A7DE7 /* Around.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Around.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E457EA8D23A800B4000A7DE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,7 +115,8 @@
 			files = (
 				BC723CA22412A0BC00184B05 /* CoreLocation.framework in Frameworks */,
 				BC723CAB2412A86800184B05 /* MapKit.framework in Frameworks */,
-				07EFD874616CDE1A11D0B230 /* Pods_Around.framework in Frameworks */,
+				7575F4E22427AAD600764B77 /* libsqlite3.0.tbd in Frameworks */,
+				DE7FB334F579BC3E1AE8ECB9 /* Pods_Around.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +126,7 @@
 		05D2DF38796A6A7E982F483E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7575F4E12427AAB200764B77 /* libsqlite3.0.tbd */,
 				BC723CAA2412A86800184B05 /* MapKit.framework */,
 				BC723CA02412A07C00184B05 /* CoreLocation.framework */,
 				CD6B94DEA20A4AA9F128908C /* Pods_Around.framework */,
@@ -123,8 +144,8 @@
 		BCE5551123FD433F00D92438 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BC56093B23D1C01B003DC8FD /* FireBaseManager.swift */,
 				BC5D28AF23FD4A9F00D76D24 /* UserData.swift */,
+				BC56093B23D1C01B003DC8FD /* FireBaseManager.swift */,
 				BC151A2E2402A26D005CCCB0 /* FireStoreManager.swift */,
 				BCCBE1A12403F91C00951426 /* PostManager.swift */,
 				BCDF913B240572CD002977B1 /* Product.swift */,
@@ -135,6 +156,13 @@
 				BCB77830241417FA00F3617F /* Artwork.swift */,
 				BCB778322414234B00F3617F /* ArtworkViews.swift */,
 				BCA7EBA124222B1400BC3A69 /* DBManager.swift */,
+				7575F4DF2427A65D00764B77 /* ModelSql.swift */,
+				7532189324293284003C0462 /* Posts + Sql.swift */,
+				BCB324FC243608670044E5AD /* User + Sql.swift */,
+				75B104B0242D1ED3009CCC0A /* Model.swift */,
+				BCDC50B12435EE9C0099E6C2 /* UIimage + Extension.swift */,
+				BC95F6B22439EC8600B77377 /* UItoast.swift */,
+				BCE092B62441F7F000BD4730 /* Service.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,14 +206,16 @@
 				E457EA9823A800B8000A7DE7 /* LaunchScreen.storyboard */,
 				E457EA9323A800B4000A7DE7 /* Main.storyboard */,
 				E4C9D4C923CA128A00E94A9B /* SignInViewController.swift */,
+				BC173D8323FC253100A21104 /* RegisterViewController.swift */,
 				E457EA8F23A800B4000A7DE7 /* SceneDelegate.swift */,
 				E4C9D4CB23CA377700E94A9B /* HomeViewController.swift */,
 				BC84B7AF23F98BFD001A5EBF /* ProfileViewController.swift */,
-				BC173D8323FC253100A21104 /* RegisterViewController.swift */,
 				BC1E7C8D23FEB44000A13948 /* FeedViewController.swift */,
 				BCCBE1A32404022C00951426 /* addPostViewController.swift */,
 				BC28C8FE2405824000ECF857 /* ProductCell.swift */,
 				BC723CA82412A79D00184B05 /* AroundViewController.swift */,
+				7575F4E32427ABFE00764B77 /* Around-Bridging-Header.h */,
+				BC54D0212445E28F00921363 /* PopUpPostViewController.swift */,
 			);
 			path = Around;
 			sourceTree = "<group>";
@@ -226,6 +256,7 @@
 				TargetAttributes = {
 					E457EA8923A800B4000A7DE7 = {
 						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -328,13 +359,19 @@
 				BC84B7B023F98BFD001A5EBF /* ProfileViewController.swift in Sources */,
 				BCDF913C240572CD002977B1 /* Product.swift in Sources */,
 				BC1E7C8E23FEB44000A13948 /* FeedViewController.swift in Sources */,
+				7575F4E02427A65D00764B77 /* ModelSql.swift in Sources */,
 				BC723CAF2412B7A900184B05 /* UserAnnotation.swift in Sources */,
 				BCB778332414234B00F3617F /* ArtworkViews.swift in Sources */,
 				E4C9D4CC23CA377700E94A9B /* HomeViewController.swift in Sources */,
 				BC5D28B023FD4A9F00D76D24 /* UserData.swift in Sources */,
+				7532189424293284003C0462 /* Posts + Sql.swift in Sources */,
 				BC723CA92412A79D00184B05 /* AroundViewController.swift in Sources */,
+				75B104B1242D1ED3009CCC0A /* Model.swift in Sources */,
 				BCB7782D2413F53A00F3617F /* UiColor+Hex.swift in Sources */,
+				BCE092B72441F7F000BD4730 /* Service.swift in Sources */,
 				BC151A2F2402A26D005CCCB0 /* FireStoreManager.swift in Sources */,
+				BCDC50B22435EE9C0099E6C2 /* UIimage + Extension.swift in Sources */,
+				BC54D0222445E28F00921363 /* PopUpPostViewController.swift in Sources */,
 				BC28C8FD2405808500ECF857 /* extention.swift in Sources */,
 				BCB77831241417FA00F3617F /* Artwork.swift in Sources */,
 				BC173D8423FC253100A21104 /* RegisterViewController.swift in Sources */,
@@ -342,11 +379,13 @@
 				E4C9D4CA23CA128A00E94A9B /* SignInViewController.swift in Sources */,
 				BC723CA72412A11100184B05 /* LocationService.swift in Sources */,
 				E457EA8E23A800B4000A7DE7 /* AppDelegate.swift in Sources */,
+				BC95F6B32439EC8600B77377 /* UItoast.swift in Sources */,
 				BCCBE1A42404022C00951426 /* addPostViewController.swift in Sources */,
 				BC28C8FF2405824000ECF857 /* ProductCell.swift in Sources */,
 				E457EA9023A800B4000A7DE7 /* SceneDelegate.swift in Sources */,
 				BC56093C23D1C01B003DC8FD /* FireBaseManager.swift in Sources */,
 				BCA7EBA224222B1400BC3A69 /* DBManager.swift in Sources */,
+				BCB324FD243608670044E5AD /* User + Sql.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +530,7 @@
 			baseConfigurationReference = 284D865E8E08931ADF8C94F8 /* Pods-Around.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F66D4U3NV4;
 				INFOPLIST_FILE = Around/Info.plist;
@@ -499,8 +539,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.moreroron.Aroundd;
+				PRODUCT_BUNDLE_IDENTIFIER = net.moreroron.Around;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Around/Around-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -511,6 +553,7 @@
 			baseConfigurationReference = AF762B1DC884733B41F1C6C3 /* Pods-Around.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F66D4U3NV4;
 				INFOPLIST_FILE = Around/Info.plist;
@@ -519,8 +562,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.moreroron.Aroundd;
+				PRODUCT_BUNDLE_IDENTIFIER = net.moreroron.Around;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Around/Around-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -3,7 +3,7 @@ import Firebase
 import GoogleSignIn
 import FirebaseAuth
 import FirebaseDatabase
-
+import SwiftEntryKit
 
 class SignInViewController: UIViewController {
 
@@ -30,6 +30,8 @@ class SignInViewController: UIViewController {
     
     @IBAction func loginButton_Click(_ sender: Any) {
         
+        UItoast.toastTOP(text: "success login - redirection to profile panel")
+        
         FireBaseManager.Login(email: emailTF.text!, password: passwordTF.text!) { (success:Bool) in
             
             if(success){
@@ -37,6 +39,7 @@ class SignInViewController: UIViewController {
                 self.setData()
 
             } else {
+                
                 self.shouldPerformSegue(withIdentifier: "showProfileLogIn", sender: self)
             }
         }
@@ -67,7 +70,7 @@ class SignInViewController: UIViewController {
 
 
                        
-                        self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
+    self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
             }
          
         }

@@ -15,9 +15,9 @@ import FirebaseDatabase
 
 class FireStoreManager : NSObject {
     
-    
+
     static func getImage(ref:StorageReference) -> UIImage? {
-    
+
         var image:UIImage?
                     ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
                         if error != nil {
@@ -30,13 +30,7 @@ class FireStoreManager : NSObject {
                             return
                       }
                     }
-    
-        
-        
-//        while(image == nil){
-//            print("cpu burn")
-//        }
-        
+
             return image
 
     }

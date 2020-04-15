@@ -18,6 +18,7 @@ public class LocationService: NSObject, CLLocationManagerDelegate{
     
     
     override init() {
+
         locationManager = CLLocationManager()
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
@@ -89,7 +90,7 @@ public class LocationService: NSObject, CLLocationManagerDelegate{
             return false
         }
         
-        print("Location quality is good enough.")
+        //print("Location quality is good enough.")
         locationDataArray.append(location)
         
         return true
@@ -117,6 +118,8 @@ public class LocationService: NSObject, CLLocationManagerDelegate{
     }
     
     func notifiyDidUpdateLocation(newLocation:CLLocation){
-        NotificationCenter.default.post(name: Notification.Name(rawValue:"didUpdateLocation"), object: nil, userInfo: ["location" : newLocation])
+        NotificationCenter.default.post(name: Notification.Name("didUpdateLocation"), object: nil, userInfo: ["location":newLocation])
+//        
+//        NotificationCenter.default.post(name: Notification.Name(rawValue:"didUpdateLocation"), object: nil, userInfo: ["location" : newLocation])
     }
 }

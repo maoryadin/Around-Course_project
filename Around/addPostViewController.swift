@@ -24,13 +24,7 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        locationManager.requestWhenInUseAuthorization()
-//
-//        if(CLLocationManager.locationServicesEnabled()) {
-//            locationManager.delegate = self
-//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//            locationManager.startUpdatingLocation()
-//        }
+
         
          let settings = FirestoreSettings()
         post = Post(uid: FireBaseManager.user!.uid,username: "", text: "",imageRef: "", time: "",lat: 0,long: 0)
@@ -65,10 +59,8 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
      @IBAction func PostActionButtom_clicked(_ sender: Any) {
         
         let loc =  LocationService.sharedInstance.locationManager.location
-        //loc?.distance(from: <#T##CLLocation#>)
         let lat = loc!.coordinate.latitude
         let long = loc!.coordinate.longitude
-        //self.locationManager.stopUpdatingLocation()
         let currentDate = NSDate.now
         post?.text = "\(textPostField.text!)"
         post?.username = FireBaseManager.user!.username
@@ -81,12 +73,12 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
                     print("profile image is compressed")
                     let ref = FireBaseManager.getRef(path: post?.imageRef)
                     FireBaseManager.uploadFile(data: data, ref: ref,completion: {
+                        
                         self.db.collection("Posts").document("\(self.post!.uid)_\(self.post!.time)").setData((self.post!.toJson()), merge: false, completion: nil)
 })
                 
 
                     }
-                    
                     print("collection is created")
         }
         

@@ -32,9 +32,11 @@ class AroundViewController: UIViewController, MKMapViewDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        LocationService.sharedInstance.useFilter = true
+        self.mapView.delegate = self
+        self.mapView.showsUserLocation = false
+        
         docRef = Firestore.firestore().collection("Posts")
-
-        createArtwork()
         self.userAnnotationImage = UIImage(named: "user_position_ball")!
         
         self.accuracyRangeCircle = MKCircle(center: CLLocationCoordinate2D.init(latitude: LocationService.sharedInstance.locationManager.location!.coordinate.latitude, longitude: LocationService.sharedInstance.locationManager.location!.coordinate.longitude), radius: 50)
@@ -43,68 +45,62 @@ class AroundViewController: UIViewController, MKMapViewDelegate{
         self.didInitialZoom = false
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateMap(notification:)), name: Notification.Name(rawValue:"didUpdateLocation"), object: nil)
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(showTurnOnLocationServiceAlert(notification:)), name: Notification.Name(rawValue:"showTurnOnLocationServiceAlert"), object: nil)
-        
+
         mapView.register(ArtworkView.self,
         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         loadInitialData()
     }
     
-    func loadInitialData() {
-      // 1
-        docRef!.addSnapshotListener {doc,err in
-            //self.feedPosts.removeAll()
-            
-            for document in doc!.documents {
-                print("listener !")
-                let data = document.data()
-
-               // if((distanceInMeters) <= 50.0){
-                    let artwork = Artwork(json:data)
-                //self.artworks.append(artwork)
-                self.mapView.addAnnotation(artwork)
-
-                   // print(self.locationManager.location!.distance(from: postLocation).advanced(by: 0))
-                    print("adding post")
-                           // self.feedPosts.append(post)
-                    //self.tb.reloadData()
-
-                //}
-            }
-            
-            //self.tb.reloadData()
-
-            //self.tb.reloadData()
-            
-            
-            
-        //  artworks.append(contentsOf: )
-
-        }
+    override func viewWillAppear(_ animated: Bool) {
+                NotificationCenter.default.addObserver(self, selector: #selector(updateMap(notification:)), name: Notification.Name("didUpdateLocation"), object: nil)
         
-
-    }
-  
-    func createArtwork(){
-        let artwork = Artwork(title: "King David Kalakaua",
-          locationName: "Waikiki Gateway Park",
-          discipline: "Sculpture",
-          coordinate: CLLocationCoordinate2D(latitude: 21.283921, longitude: -157.831661))
-        mapView.addAnnotation(artwork)
-        LocationService.sharedInstance.useFilter = true
-        self.mapView.delegate = self
-        self.mapView.showsUserLocation = false
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showTurnOnLocationServiceAlert(notification:)), name: Notification.Name("showTurnOnLocationServiceAlert"), object: nil)
         
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+              NotificationCenter.default.removeObserver(self, name: Notification.Name("didUpdateLocation"), object: nil)
+        
+                NotificationCenter.default.removeObserver(self, name: Notification.Name("showTurnOnLocationServiceAlert"), object: nil)
+    }
+    
 
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func loadInitialData() {
+        docRef!.addSnapshotListener {doc,err in
+            
+            doc?.documentChanges.forEach{ diff in
+                
+                if(diff.type == .added) {
+                    let artwork = Artwork(json:diff.document.data())
+                    self.mapView.addAnnotation(artwork)
+                }
+                
+                if(diff.type == .removed) {
+                    self.removeSpecificAnnotation(time: diff.document["time"] as! String)
+                }
+                
+                if(diff.type == .modified) {
+                    
+                }
+                
+            }
+        }
     }
+  
+    func removeSpecificAnnotation(time:String) {
+        for annotation in self.mapView.annotations {
+            
+                if let annotation = annotation as? Artwork {
+                    if time == annotation.post?.time {
+                        self.mapView.removeAnnotation(annotation)
+                        return
+                    }
+            }
+    }
+}
+
 
     @objc func showTurnOnLocationServiceAlert(notification: NSNotification){
         let alert = UIAlertController(title: "Turn on Location Service", message: "To use location tracking feature of the app, please turn on the location service from the Settings app.", preferredStyle: .alert)
@@ -125,7 +121,7 @@ class AroundViewController: UIViewController, MKMapViewDelegate{
         
     }
     
-    @objc func updateMap(notification: NSNotification){
+    @objc func updateMap(notification: Notification){
         if let userInfo = notification.userInfo{
             
             updatePolylines()
@@ -208,6 +204,49 @@ class AroundViewController: UIViewController, MKMapViewDelegate{
         self.mapView.addAnnotation(self.userAnnotation!)
     }
     
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let artwork = view.annotation as! Artwork
+
+        let storyB = UIStoryboard(name: "Main", bundle: nil)
+        let secondViewController =
+        storyB.instantiateViewController(withIdentifier:
+        "PopUpPostViewController") as! PopUpPostViewController
+        secondViewController.post = artwork.post
+        FireBaseManager.db.collection("Users").document(artwork.post!.uid).getDocument(completion: {data,err in
+            
+            FireBaseManager.getRef(path: (data?.data()!["profilePicRef"] as! String)).getData(maxSize: 1 * 1024 * 1024) { data, error in
+                                       if error != nil {
+                                           print("error")
+                                       return
+                                     } else {
+                                           print("success")
+
+                                    
+                    secondViewController.profileImage = UIImage(data: data!)
+               //     secondViewController.postImage = UIImage(data: data!)
+
+
+    }}})
+        
+        FireBaseManager.db.collection("Posts").document("\(artwork.post!.uid)_\(artwork.post!.time)").getDocument(completion: {data,err in
+            FireBaseManager.getRef(path: (data?.data()!["imageRef"] as!
+                String)).getData(maxSize: 1 * 1024 * 1024, completion: {data, error in
+
+                  if error != nil {
+                      print("error")
+                      return
+                  } else {
+                      print("success")
+                      secondViewController.postImage = UIImage(data: data!)
+                      self.present(secondViewController, animated: true, completion: nil)
+
+                  }
+              })
+
+
+          })
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 
         if(annotation is UserAnnotation){
@@ -253,3 +292,4 @@ class AroundViewController: UIViewController, MKMapViewDelegate{
         }
     }
 }
+

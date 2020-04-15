@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in ProfileViewController.setData():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "FireBaseManager.user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static UserData.getDownloadURLfromDb():User + Sql.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "FireBaseManager.currentUserId">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

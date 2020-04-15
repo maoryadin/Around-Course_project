@@ -18,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         LocationService.sharedInstance.startUpdatingLocation()
+        ModelSql.instance.connect()
+        
+        
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory,FileManager.SearchPathDomainMask.userDomainMask, true)
+        print(paths[0])
         // Google Auth Config
        // let db = openDatabase()
         FirebaseApp.configure()

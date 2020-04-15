@@ -22,13 +22,24 @@ class PostManager: NSObject {
 
     
     static func fillPosts(uid:String?,toId:String,completion:@escaping(_ result:String) -> Void) {
-//        posts = []
-//        let allPost = databaseRef.child("Posts")
-//        print(allPost)
-//        let post = databaseRef.child("Posts").queryOrdered(byChild: "uid").queryEqual(toValue: FireBaseManager.currentUser?.uid).observe(.childAdded, with: {
-//            snapshot in
-//            print(snapshot)
-//        })
+        posts = []
+        let allPost = databaseRef.child("Posts")
+        print(allPost)
+        let post = databaseRef.child("Posts").queryOrdered(byChild: "uid").queryEqual(toValue: FireBaseManager.currentUser?.uid).observe(.childAdded, with: {
+            snapshot in
+            print(snapshot)
+        })
+        
+        databaseRef.child("Posts").queryOrdered(byChild: "uid").queryEqual(toValue: FireBaseManager.currentUser?.uid).observe(.childAdded, with: {
+            snapshot in
+            print(snapshot)
+            let p = snapshot.value as! [String:Any]
+            let post = Post(json: p)
+            posts.append(post)
+            print(post.text)
+        
+        })
+        completion("");
 //
 //        databaseRef.child("Posts").queryOrdered(byChild: "uid").queryEqual(toValue: FireBaseManager.currentUser?.uid).observe(.childAdded, with:{
 //            snapshot in
@@ -45,6 +56,9 @@ class PostManager: NSObject {
 }
 
 class Post {
+    
+    var modelSql:ModelSql = ModelSql()
+    
     var uid:String = ""
     var username:String = ""
     var text:String = ""
@@ -61,6 +75,12 @@ class Post {
         self.time = time
         self.lat = lat
         self.long = long
+    }
+    init(){
+        
+    }
+    init(uid:String){
+        self.uid=uid
     }
     init(json:[String:Any]){
         
