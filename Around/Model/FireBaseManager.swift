@@ -10,17 +10,18 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
-
 class FireBaseManager: NSObject {
 
     static let databaseRef = Database.database().reference()
     static var currentUserId:String = ""
     static var currentUser:User? = nil
     static var user:UserData?
+    static var db:Firestore! = Firestore.firestore()
+    let settings = FirestoreSettings()
 
     static func Login(email:String,password:String, completion:
         @escaping (_ success:Bool) -> Void) {
-        
+
         Auth.auth().signIn(withEmail: email, password: password,
                            completion: { (user, error) in
                             if let error = error {
@@ -30,6 +31,14 @@ class FireBaseManager: NSObject {
                                 currentUser = user?.user
                                 currentUserId = (((user?.user.uid)!))
                                 //Get specific document from current user
+                                 let userDB = UserData.getUserFromDb()
+
+                                if(userDB != nil) {
+                                   self.user = userDB
+                                    db = Firestore.firestore()
+                                    completion(true)
+                                    return
+                                }
                                 let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
 
                                 // Get data
@@ -37,38 +46,66 @@ class FireBaseManager: NSObject {
                                     if let document = document, document.exists {
                                         let dataDescription = document.data()
                                         self.user = UserData(json: dataDescription!)
+                                        UserData.addToDb(user: self.user!)
+                                        db = Firestore.firestore()
+                                        completion(true)
                                     }
                                 }
-                                completion(true)
+                               // completion(true)
                             }
-                            
+
         })
+//    }
+//    static func Login(email:String,password:String, completion:
+//        @escaping (_ success:Bool) -> Void) {
+//
+//        Auth.auth().signIn(withEmail: email, password: password,
+//                           completion: { (user, error) in
+//                            if let error = error {
+//                                print(error.localizedDescription)
+//                                completion(false)
+//                            } else {
+//                                currentUser = user?.user
+//                                currentUserId = (((user?.user.uid)!))
+//                                //Get specific document from current user
+//                                let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+//
+//                                // Get data
+//                                docRef.getDocument { (document, error) in
+//                                    if let document = document, document.exists {
+//                                        let dataDescription = document.data()
+//                                        self.user = UserData(json: dataDescription!)
+//                                    }
+//                                }
+//                                completion(true)
+//                            }
+//
+//        })
     }
-    
 
-    static func CreateAccount(email:String, password:String, completion:
-        @escaping (_ result:String) -> Void) {
-        
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            if let error = error {
-                    print(error.localizedDescription)
-                        return
+        static func CreateAccount(email:String, password:String, completion:
+            @escaping (_ result:String) -> Void) {
+            
+            
+            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+                if let error = error {
+                        print(error.localizedDescription)
+                            return
+                        }
+                let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+
+                // Get data
+                docRef.getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        let dataDescription = document.data()
+                        self.user = UserData(json: dataDescription!)
                     }
-            let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
-
-            // Get data
-            docRef.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let dataDescription = document.data()
-                    self.user = UserData(json: dataDescription!)
                 }
-            }
-            completion("")
+                completion("")
+        }
+        
+        
     }
-    
-    
-}
     
     static func AddUser(username:String,password:String) {
         _ = Auth.auth().currentUser?.uid // uid of the user
@@ -108,6 +145,33 @@ class FireBaseManager: NSObject {
     }
 }
     
+    static func getImageFromStorage(ref:StorageReference) -> UIImage? {
+
+        var image:UIImage?
+                    ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                        if error != nil {
+                            print("error")
+                        image = nil
+                            return
+                      } else {
+                            print("success")
+                           image = UIImage(data: data!)
+                            return
+                      }
+                    }
+
+            return image
+
+    }
+    static func deleteFrom(collection:String,document:String){
+        db.collection(collection).document(document).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+    }
 
 }
 

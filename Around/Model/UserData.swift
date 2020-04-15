@@ -20,6 +20,9 @@ class UserData {
     var email:String = ""
     var uid:String = ""
 
+    init(){
+        
+    }
     
     init(first:String, last:String, profilePic:String, email:String, uid:String, age:String,username:String){
         

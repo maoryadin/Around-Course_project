@@ -12,55 +12,97 @@ import FirebaseAuth
 import FirebaseDatabase
 import CoreLocation
 
-class FeedViewController: UIViewController, UITableViewDataSource, CLLocationManagerDelegate {
+class FeedViewController: UIViewController {
     
-    let semaphore = DispatchSemaphore(value: 1)
-
     var db:Firestore!
     let cellId = "photoCell"
-    var products : [Product] = [Product]()
+    //var products : [Product] = [Product]()
     var feedPosts = [Post]()
-    let locationManager = CLLocationManager()
     var docRef:CollectionReference?
     @IBOutlet weak var tb: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        docRef = Firestore.firestore().collection("Posts")
-        tb.register(ProductCell.self, forCellReuseIdentifier: cellId)
-        locationManager.requestWhenInUseAuthorization()
-        if(CLLocationManager.locationServicesEnabled()) {
-            locationManager.delegate = self as? CLLocationManagerDelegate
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.distanceFilter = 1
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
-            createProductArray()
 
-        }
+    
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: Notification.Name("didReceiveData"), object: nil)
+//        ModelEvents.PostDataEvent.observe {
+//
+//            self.reloadData();
+//        }
+//        reloadData();
+        docRef = Firestore.firestore().collection("Posts")
+        tb.register(PostCell.self, forCellReuseIdentifier: cellId)
+        //LocationService.sharedInstance.locationManager.delegate = self
+            createProductArray()
+//
+//        }
 
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
+        
+        
     }
     
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("new location !")
-        //semaphore.signal()
-
-        createProductArray()
-        //manager.stopUpdatingLocation()
+    override func viewDidAppear(_ animated: Bool) {
+  //      LocationService.sharedInstance.locationManager.delegate = self
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+//        LocationService.sharedInstance.locationManager.delegate = LocationService.sharedInstance.self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+    NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: Notification.Name("didUpdateLocation"), object: nil)
+    
 
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("didUpdateLocation"), object: nil)
+
+        
+    }
+
+
+    func createProductArray() {
+                
+        docRef!.addSnapshotListener {doc,err in
+            self.feedPosts.removeAll()
+            
+            for document in doc!.documents {
+
+                let data = document.data()
+                let postLocation = CLLocation(latitude: data["lat"]! as! Double, longitude: data["long"]! as! Double)
+                let distanceInMeters = LocationService.sharedInstance.locationManager.location!.distance(from: postLocation) // result is in meters
+
+                if((distanceInMeters) <= 50.0){
+                    let post = Post(json:data)
+                    
+                    print("adding post")
+                            self.feedPosts.append(post)
+
+                }
+            }
+            self.tb.reloadData()
+            
+        }
+        self.tb.reloadData()
+       }
+
+}
+
+extension FeedViewController : UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return feedPosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ProductCell
-        let currentLastItem = feedPosts[indexPath.row]
-            cell.post = currentLastItem
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PostCell
+        //let currentLastItem = feedPosts[indexPath.row]
+            cell.post = feedPosts[indexPath.row]
         return cell
     }
     
@@ -69,40 +111,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, CLLocationMan
         return 100
     }
     
+}
 
+extension FeedViewController {
     
-    func createProductArray() {
-                
-        docRef!.addSnapshotListener {doc,err in
-            self.feedPosts.removeAll()
-            
-            for document in doc!.documents {
-                print("listener !")
-                let data = document.data()
-                let post = Post(json:data)
-                let postLocation = CLLocation(latitude: post.lat, longitude: post.long)
+    @objc func onDidReceiveData(_ notification:Notification) {
+        // Do something now
+        print("we on feed and got notification")
+        createProductArray()
+    }
 
-                print("lat:\(post.lat), long:\(post.long)")
-                print(self.locationManager.location!.distance(from: postLocation).advanced(by: 0))
-                if(self.locationManager.location!.distance(from: postLocation).advanced(by: 0) <= 20.0){
-                    
-                   // print(self.locationManager.location!.distance(from: postLocation).advanced(by: 0))
-                    print("adding post")
-                            self.feedPosts.append(post)
-                    //self.tb.reloadData()
-
-                }
-            }
-            
-            //self.tb.reloadData()
-
-            self.tb.reloadData()
-            
-            
-            
-          
-        }
-        //self.tb.reloadData()
-
-       }
 }
