@@ -117,7 +117,7 @@ extension FeedViewController {
     
     @objc func onDidReceiveData(_ notification:Notification) {
         // Do something now
-        print("we on feed and got notification")
+     //   print("we on feed and got notification")
         createProductArray()
     }
 

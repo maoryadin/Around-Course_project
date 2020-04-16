@@ -4,6 +4,7 @@ import GoogleSignIn
 import FirebaseAuth
 import FirebaseDatabase
 import SwiftEntryKit
+import TWMessageBarManager
 
 class SignInViewController: UIViewController {
 
@@ -30,8 +31,9 @@ class SignInViewController: UIViewController {
     
     @IBAction func loginButton_Click(_ sender: Any) {
         
-        UItoast.toastTOP(text: "success login - redirection to profile panel")
-        
+        TWMessageBarManager.init().showMessage(withTitle: "ss", description: "dfssdaf", type: .success)
+
+
         FireBaseManager.Login(email: emailTF.text!, password: passwordTF.text!) { (success:Bool) in
             
             if(success){

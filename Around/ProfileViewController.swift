@@ -83,7 +83,7 @@ signOutBtn.image?.withRenderingMode(.alwaysOriginal)
 
     @objc func onDidReceiveData(notification:Notification) {
         // Do something now
-        print("we on profile and got notification")
+    //    print("we on profile and got notification")
     }
 
     @IBAction func SignOutAction(_ sender: Any) {
