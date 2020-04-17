@@ -42,6 +42,7 @@
 		E457EA9523A800B4000A7DE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E457EA9323A800B4000A7DE7 /* Main.storyboard */; };
 		E457EA9723A800B8000A7DE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E457EA9623A800B8000A7DE7 /* Assets.xcassets */; };
 		E457EA9A23A800B8000A7DE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E457EA9823A800B8000A7DE7 /* LaunchScreen.storyboard */; };
+		E473B9C32449E7C0000F325A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E473B9C22449E7C0000F325A /* TextField.swift */; };
 		E4C9D4C823CA0A1400E94A9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4C9D4C723CA0A1400E94A9B /* GoogleService-Info.plist */; };
 		E4C9D4CA23CA128A00E94A9B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C9D4C923CA128A00E94A9B /* SignInViewController.swift */; };
 		E4C9D4CC23CA377700E94A9B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C9D4CB23CA377700E94A9B /* HomeViewController.swift */; };
@@ -101,6 +102,7 @@
 		E457EA9623A800B8000A7DE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E457EA9923A800B8000A7DE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E457EA9B23A800B8000A7DE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E473B9C22449E7C0000F325A /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		E4C9D4C723CA0A1400E94A9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E4C9D4C923CA128A00E94A9B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		E4C9D4CB23CA377700E94A9B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				BC723CA82412A79D00184B05 /* AroundViewController.swift */,
 				7575F4E32427ABFE00764B77 /* Around-Bridging-Header.h */,
 				BC54D0212445E28F00921363 /* PopUpPostViewController.swift */,
+				E473B9C22449E7C0000F325A /* TextField.swift */,
 			);
 			path = Around;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				BC84B7B023F98BFD001A5EBF /* ProfileViewController.swift in Sources */,
 				BCDF913C240572CD002977B1 /* Product.swift in Sources */,
 				BC1E7C8E23FEB44000A13948 /* FeedViewController.swift in Sources */,
+				E473B9C32449E7C0000F325A /* TextField.swift in Sources */,
 				7575F4E02427A65D00764B77 /* ModelSql.swift in Sources */,
 				BC723CAF2412B7A900184B05 /* UserAnnotation.swift in Sources */,
 				BCB778332414234B00F3617F /* ArtworkViews.swift in Sources */,
