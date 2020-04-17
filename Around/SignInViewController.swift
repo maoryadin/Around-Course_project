@@ -7,51 +7,31 @@ import Pastel
 import IBAnimatable
 class SignInViewController: UIViewController {
 
-    
     var db:Firestore!
     var userData:UserData!
     
-    @IBOutlet weak var emailTF: UITextField!
+    // fields views & btn
+    @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var passwordView: UIView!
+    @IBOutlet weak var emailView: UIView!
     
+    // fields
+    @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        let pastelView = PastelView(frame: view.bounds)
-//
-//        // Custom Direction
-//        pastelView.startPastelPoint = .bottomLeft
-//        pastelView.endPastelPoint = .topRight
-//
-//        // Custom Duration
-//        pastelView.animationDuration = 3.0
-//
-//        // Custom Color
-//        pastelView.setColors([UIColor(red: 156/255, green: 39/255, blue: 176/255, alpha: 1.0),
-//                              UIColor(red: 255/255, green: 64/255, blue: 129/255, alpha: 1.0),
-//                              UIColor(red: 123/255, green: 31/255, blue: 162/255, alpha: 1.0),
-//                              UIColor(red: 32/255, green: 76/255, blue: 255/255, alpha: 1.0),
-//                              UIColor(red: 32/255, green: 158/255, blue: 255/255, alpha: 1.0),
-//                              UIColor(red: 90/255, green: 120/255, blue: 127/255, alpha: 1.0),
-//                              UIColor(red: 58/255, green: 255/255, blue: 217/255, alpha: 1.0)])
-//
-//        pastelView.startAnimation()
-//        view.insertSubview(pastelView, at: 0)
-//
-//
-//        let settings = FirestoreSettings()
-//
-//        Firestore.firestore().settings = settings
-//        db = Firestore.firestore()
-//        
         
-    }
+        let fieldRadius = 8
+        let buttonRadius = 4
+        emailView.layer.cornerRadius = CGFloat(fieldRadius)
+        passwordView.layer.cornerRadius = CGFloat(fieldRadius)
+        loginBtn.layer.cornerRadius = CGFloat(buttonRadius)
     
+    }
     
     @IBAction func loginButton_Click(_ sender: Any) {
         
-
         
         FireBaseManager.Login(email: emailTF.text!, password: passwordTF.text!) { (success:Bool) in
             
@@ -61,13 +41,7 @@ class SignInViewController: UIViewController {
                 self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
 
             }
-//            } else {
-//
-//                self.shouldPerformSegue(withIdentifier: "showProfileLogIn", sender: self)
-//            }
         }
-        
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

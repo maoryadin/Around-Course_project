@@ -12,34 +12,41 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class RegisterViewController: UIViewController {
-
+    
     var db:Firestore!
     var myUser:UserData!
+
+    // field views
+    @IBOutlet weak var emailView: UIView!
+    @IBOutlet weak var passwordView: UIView!
+    @IBOutlet weak var usernameView: UIView!
+    @IBOutlet weak var ageView: UIView!
+    @IBOutlet weak var firstnameView: UIView!
+    @IBOutlet weak var lastnameView: UIView!
     
-    
+    // fields
     @IBOutlet weak var usernameField: UITextField!
-    
     @IBOutlet weak var emailField: UITextField!
-    
     @IBOutlet weak var passwordField: UITextField!
-    
     @IBOutlet weak var ageField: UITextField!
-    
     @IBOutlet weak var firstNameField: UITextField!
-    
     @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var registerBtn: UIButton!
     
     var imageView = UIImageView()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//           let settings = FirestoreSettings()
-//
-//          Firestore.firestore().settings = settings
-//            // [END setup]
-//          db = Firestore.firestore()
+        let fieldRadius = 8
+        let buttonRadius = 4
+        emailView.layer.cornerRadius = CGFloat(fieldRadius)
+        passwordView.layer.cornerRadius = CGFloat(fieldRadius)
+        usernameView.layer.cornerRadius = CGFloat(fieldRadius)
+        ageView.layer.cornerRadius = CGFloat(fieldRadius)
+        firstnameView.layer.cornerRadius = CGFloat(fieldRadius)
+        lastnameView.layer.cornerRadius = CGFloat(fieldRadius)
+        registerBtn.layer.cornerRadius = CGFloat(buttonRadius)
     }
     
     
