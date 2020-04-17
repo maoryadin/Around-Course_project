@@ -34,11 +34,10 @@ class ProfileViewController: UIViewController {
     var imagePicker:UIImagePickerController!
     var activityView:UIActivityIndicatorView!
     var email = Auth.auth().currentUser?.email
-    let uid = Auth.auth().currentUser?.uid
-    let postsRef = Firestore.firestore().collection("Posts")
-    let ref = FireBaseManager.getRef(path: FireBaseManager.user?.profilePicRef)
-    
-    
+    var uid = Auth.auth().currentUser?.uid
+    var postsRef:CollectionReference? = Firestore.firestore().collection("Posts")
+    var ref:StorageReference? = FireBaseManager.getRef(path: FireBaseManager.user?.profilePicRef)
+    var listener:ListenerRegistration?
     
         override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,36 +69,36 @@ signOutBtn.image?.withRenderingMode(.alwaysOriginal)
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(notification:)), name: Notification.Name("didUpdateLocation"), object: nil)
     
 
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("didUpdateLocation"), object: nil)
 
         
     }
 
-    @objc func onDidReceiveData(notification:Notification) {
-        // Do something now
-    //    print("we on profile and got notification")
-    }
 
     @IBAction func SignOutAction(_ sender: Any) {
 
-                let firebaseAuth = Auth.auth()
             do {
-              try firebaseAuth.signOut()
-                
-                exit(0)
-            
-                
-            } catch let signOutError as NSError {
-              print ("Error signing out: %@", signOutError)
+              try Auth.auth().signOut()
+                let signInController = SignInViewController()
+                let signInNavigationController = UINavigationController(rootViewController: signInController)
+                let parent = self.parent!
+                parent.dismiss(animated: true, completion: {
+                    self.userData = nil
+                    self.email = nil
+                    self.uid = nil
+                    self.postsRef = nil
+                    self.ref = nil
+                    self.listener?.remove()
+                    self.present(signInNavigationController, animated: true, completion: nil)
 
-            }
-        }
+                })
+            } catch let err {
+                print(err)
+        }}
 
     func setData() {
         
@@ -117,7 +116,7 @@ signOutBtn.image?.withRenderingMode(.alwaysOriginal)
 
         if (urlDB == nil) {
 
-            ref.downloadURL(completion: { url,error in
+            ref!.downloadURL(completion: { url,error in
                 if(error == nil){
                 self.ProfileImageView.kf.setImage(with: url!)
                     UserData.addToDbDownloadURL(downloadURL: url!.absoluteString)
@@ -129,15 +128,15 @@ signOutBtn.image?.withRenderingMode(.alwaysOriginal)
         }
     }
         
-        func createProductArray() {
 
+    func createProductArray() {
             var latestTime:String = "0"
             if (PostManager.posts.count != 0)
             {
                 latestTime = PostManager.posts.last!.time
             }
             
-            postsRef.whereField("uid", isEqualTo: FireBaseManager.user!.uid).whereField("time", isGreaterThan: latestTime).addSnapshotListener {querySnapshot,error in
+            listener =  postsRef!.whereField("uid", isEqualTo: FireBaseManager.user!.uid).whereField("time", isGreaterThan: latestTime).addSnapshotListener {querySnapshot,error in
                 guard let snapshot = querySnapshot else {
                     print("Error fetching snapshot: \(error!)")
                     return
@@ -164,6 +163,7 @@ signOutBtn.image?.withRenderingMode(.alwaysOriginal)
                     }
                 }
             }
+        
 }
 
 

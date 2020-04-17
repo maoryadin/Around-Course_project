@@ -62,8 +62,8 @@
             filePath = "Around/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "initProfilePicCache()"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,9 +110,9 @@
                   urlString = "file:///Users/maor/Desktop/Around/Around/SignInViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "295">
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "96">
                </Location>
                <Location
                   uuid = "2A315B66-3658-496F-B508-190A3FAB3F30 - d9f432f3a5b4779b"
@@ -125,9 +125,9 @@
                   urlString = "file:///Users/maor/Desktop/Around/Around/SignInViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "86">
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "87">
                </Location>
             </Locations>
          </BreakpointContent>

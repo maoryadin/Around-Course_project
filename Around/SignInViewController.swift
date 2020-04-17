@@ -57,12 +57,14 @@ class SignInViewController: UIViewController {
             
             if(success){
                 print("success login")
-                self.setData()
+                //self.setData()
+                self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
 
-            } else {
-                
-                self.shouldPerformSegue(withIdentifier: "showProfileLogIn", sender: self)
             }
+//            } else {
+//
+//                self.shouldPerformSegue(withIdentifier: "showProfileLogIn", sender: self)
+//            }
         }
         
         
@@ -80,24 +82,24 @@ class SignInViewController: UIViewController {
 
         }
     
-    func setData() {
-        print("befor set data")
-        let uid = Auth.auth().currentUser?.uid
-         print(uid!)
-        let docRef = self.db.collection("Users").document(uid!)
-                 docRef.getDocument { (document, error) in
-                     if let document = document, document.exists {
-                         let dataDescription = document.data()!
-
-
-                       
-    self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
-            }
-         
-        }
-        
-        print("after set data")
-}
+//    func setData() {
+//        print("befor set data")
+//        let uid = Auth.auth().currentUser?.uid
+//         print(uid!)
+//        let docRef = self.db.collection("Users").document(uid!)
+//                 docRef.getDocument { (document, error) in
+//                     if let document = document, document.exists {
+//                         let dataDescription = document.data()!
+//
+//
+//
+//    self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
+//            }
+//
+//        }
+//
+//        print("after set data")
+//}
 //
 
         
