@@ -40,12 +40,11 @@ class SignInViewController: UIViewController {
 //        view.insertSubview(pastelView, at: 0)
 //
 //
-        let settings = FirestoreSettings()
-
-        Firestore.firestore().settings = settings
-           [END setup]
-        db = Firestore.firestore()
-        
+//        let settings = FirestoreSettings()
+//
+//        Firestore.firestore().settings = settings
+//        db = Firestore.firestore()
+//        
         
     }
     

@@ -118,7 +118,6 @@ signOutBtn.image?.withRenderingMode(.alwaysOriginal)
         if (urlDB == nil) {
 
             ref.downloadURL(completion: { url,error in
-                print(url!.absoluteString)
                 if(error == nil){
                 self.ProfileImageView.kf.setImage(with: url!)
                     UserData.addToDbDownloadURL(downloadURL: url!.absoluteString)

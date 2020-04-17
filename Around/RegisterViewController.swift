@@ -35,28 +35,27 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-           let settings = FirestoreSettings()
-
-          Firestore.firestore().settings = settings
-            // [END setup]
-          db = Firestore.firestore()
+//           let settings = FirestoreSettings()
+//
+//          Firestore.firestore().settings = settings
+//            // [END setup]
+//          db = Firestore.firestore()
     }
     
     
     @IBAction func registerOnClick(_ sender: Any) {
         
         if(usernameField.text != nil && emailField.text != nil && passwordField.text != nil && ageField.text != nil && firstNameField.text != nil && lastNameField.text != nil){
+            myUser = UserData(first: firstNameField.text!, last: lastNameField.text!, profilePic: "", email: emailField.text!, uid: "", age: ageField.text!, username: usernameField.text!)
             
-            let user = UserData(first: firstNameField.text!, last: lastNameField.text!, profilePic: "", email: emailField.text!, uid: "", age: ageField.text!, username: usernameField.text!)
-            
-            FireBaseManager.CreateAccount(email: emailField.text!, password: passwordField.text!,_user:user) {
+            FireBaseManager.CreateAccount(email: emailField.text!, password: passwordField.text!,_user:myUser) {
                         (result:String) in
                 DispatchQueue.main.async{
                     FireBaseManager.Login(email: self.emailField.text!, password: self.passwordField.text!) { (success:Bool) in
                         
                         if(success){
                             print("success login from register")
-                            self.addUserDetails()
+                            self.addDefaultImageAndSegue()
 
                         }
                         
@@ -81,12 +80,9 @@ class RegisterViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
 
-    func addUserDetails() {
+    func addDefaultImageAndSegue() {
 
         let uid = Auth.auth().currentUser?.uid
-        print(uid!)
-
-
         imageView.image = UIImage(named:"profileImage")
     
         print("compressing image..")
@@ -94,27 +90,12 @@ class RegisterViewController: UIViewController {
     
             print("profile image is compressed")
               let ref = FireBaseManager.getRef(path: "account/\(uid!)/profileImage.jpeg")
-            FireBaseManager.uploadFile(data: data, ref: ref,completion: {})
-            
-            myUser = UserData(first: firstNameField.text!, last: lastNameField.text!, profilePic: ref.fullPath, email: emailField.text!, uid: uid!, age: ageField.text!,username: usernameField.text!)
-
-                      //   print("enter to add doc func")
-
-            db.collection("Users").document(uid!).setData(myUser.toJson(), merge: true) { (Error) in
+            FireBaseManager.uploadFile(data: data, ref: ref,completion: {
                 self.performSegue(withIdentifier: "profileSegue", sender: self)
 
-            }
-//            db.collection("Users").document(uid!).setData(myUser.toJson(),merge: true,completion: {
-//                self.performSegue(withIdentifier: "profileSegue", sender: self)
-//            })
-            
+            })}
             print("collection is created")
         }
-
-            
-        
     
-        
     }
     
-}
