@@ -12,7 +12,6 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 import CoreLocation
-import TWMessageBarManager
 
 class addPostViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -59,9 +58,7 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
     
 
      @IBAction func PostActionButtom_clicked(_ sender: Any) {
-        
-        TWMessageBarManager.sharedInstance().showMessage(withTitle: "post has uploaded successfully !", description: "description: post has uploaded successfully !2", type: TWMessageBarMessageType.success)
-        
+
         let loc =  LocationService.sharedInstance.locationManager.location
         let lat = loc!.coordinate.latitude
         let long = loc!.coordinate.longitude

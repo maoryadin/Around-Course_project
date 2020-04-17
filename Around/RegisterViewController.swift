@@ -47,8 +47,9 @@ class RegisterViewController: UIViewController {
         
         if(usernameField.text != nil && emailField.text != nil && passwordField.text != nil && ageField.text != nil && firstNameField.text != nil && lastNameField.text != nil){
             
+            let user = UserData(first: firstNameField.text!, last: lastNameField.text!, profilePic: "", email: emailField.text!, uid: "", age: ageField.text!, username: usernameField.text!)
             
-            FireBaseManager.CreateAccount(email: emailField.text!, password: passwordField.text!) {
+            FireBaseManager.CreateAccount(email: emailField.text!, password: passwordField.text!,_user:user) {
                         (result:String) in
                 DispatchQueue.main.async{
                     FireBaseManager.Login(email: self.emailField.text!, password: self.passwordField.text!) { (success:Bool) in
@@ -57,6 +58,10 @@ class RegisterViewController: UIViewController {
                             print("success login from register")
                             self.addUserDetails()
 
+                        }
+                        
+                        else {
+                            print("error register")
                         }
                     }
             }

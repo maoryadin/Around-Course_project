@@ -297,6 +297,7 @@ PODS:
   - GTMSessionFetcher/Core (1.3.1)
   - GTMSessionFetcher/Full (1.3.1):
     - GTMSessionFetcher/Core (= 1.3.1)
+  - IBAnimatable (6.1.0)
   - Kingfisher (5.13.4):
     - Kingfisher/Core (= 5.13.4)
   - Kingfisher/Core (5.13.4)
@@ -306,14 +307,11 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - Pastel (0.6.0)
   - PromisesObjC (1.2.8)
-  - QuickLayout (3.0.0)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
-  - SwiftEntryKit (1.2.3):
-    - QuickLayout (= 3.0.0)
-  - TWMessageBarManager (1.8.1)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -323,10 +321,10 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - GoogleSignIn
+  - IBAnimatable
   - Kingfisher (~> 5.13)
+  - Pastel
   - SQLite.swift
-  - SwiftEntryKit (= 1.2.3)
-  - TWMessageBarManager
 
 SPEC REPOS:
   trunk:
@@ -353,14 +351,13 @@ SPEC REPOS:
     - gRPC-Core
     - GTMAppAuth
     - GTMSessionFetcher
+    - IBAnimatable
     - Kingfisher
     - leveldb-library
     - nanopb
+    - Pastel
     - PromisesObjC
-    - QuickLayout
     - SQLite.swift
-    - SwiftEntryKit
-    - TWMessageBarManager
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
@@ -386,15 +383,14 @@ SPEC CHECKSUMS:
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
+  IBAnimatable: 99dddd4c0625884a301ba3ecbc1615f8a390368e
   Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
-  QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
-  SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
-  TWMessageBarManager: fd84e7948ba7968a2b5d9454859135761214ec56
 
-PODFILE CHECKSUM: c168ae18151ca262051711d0dfaa63da07160b9a
+PODFILE CHECKSUM: 8db59ba54ad5bfc3ed01d777b683cedffe87b5f1
 
 COCOAPODS: 1.9.1

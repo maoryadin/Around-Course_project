@@ -83,7 +83,7 @@ class FireBaseManager: NSObject {
 //        })
     }
 
-        static func CreateAccount(email:String, password:String, completion:
+    static func CreateAccount(email:String, password:String,_user:UserData, completion:
             @escaping (_ result:String) -> Void) {
             
             
@@ -92,16 +92,16 @@ class FireBaseManager: NSObject {
                         print(error.localizedDescription)
                             return
                         }
-                let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+                _user.uid = Auth.auth().currentUser!.uid
+                db.collection("Users").document(_user.uid).setData(_user.toJson()) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                        completion("success")
 
-                // Get data
-                docRef.getDocument { (document, error) in
-                    if let document = document, document.exists {
-                        let dataDescription = document.data()
-                        self.user = UserData(json: dataDescription!)
                     }
                 }
-                completion("")
         }
         
         

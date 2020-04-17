@@ -16,8 +16,8 @@ target 'Around' do
   pod 'Firebase/Storage'
   pod 'SQLite.swift'
   pod 'Kingfisher', '~> 5.13'
-pod 'SwiftEntryKit', '1.2.3'
-pod 'TWMessageBarManager'
+pod "Pastel"
+   pod 'IBAnimatable'
 
 
   

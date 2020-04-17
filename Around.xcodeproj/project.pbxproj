@@ -25,7 +25,6 @@
 		BC723CAB2412A86800184B05 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC723CAA2412A86800184B05 /* MapKit.framework */; };
 		BC723CAF2412B7A900184B05 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC723CAE2412B7A900184B05 /* UserAnnotation.swift */; };
 		BC84B7B023F98BFD001A5EBF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC84B7AF23F98BFD001A5EBF /* ProfileViewController.swift */; };
-		BC95F6B32439EC8600B77377 /* UItoast.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC95F6B22439EC8600B77377 /* UItoast.swift */; };
 		BCA7EBA224222B1400BC3A69 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7EBA124222B1400BC3A69 /* DBManager.swift */; };
 		BCB324FD243608670044E5AD /* User + Sql.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB324FC243608670044E5AD /* User + Sql.swift */; };
 		BCB7782D2413F53A00F3617F /* UiColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB7782C2413F53A00F3617F /* UiColor+Hex.swift */; };
@@ -84,7 +83,6 @@
 		BC723CAA2412A86800184B05 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		BC723CAE2412B7A900184B05 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		BC84B7AF23F98BFD001A5EBF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		BC95F6B22439EC8600B77377 /* UItoast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UItoast.swift; sourceTree = "<group>"; };
 		BCA7EBA124222B1400BC3A69 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		BCB324FC243608670044E5AD /* User + Sql.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User + Sql.swift"; sourceTree = "<group>"; };
 		BCB7782C2413F53A00F3617F /* UiColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiColor+Hex.swift"; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 				BCB324FC243608670044E5AD /* User + Sql.swift */,
 				75B104B0242D1ED3009CCC0A /* Model.swift */,
 				BCDC50B12435EE9C0099E6C2 /* UIimage + Extension.swift */,
-				BC95F6B22439EC8600B77377 /* UItoast.swift */,
 				BCE092B62441F7F000BD4730 /* Service.swift */,
 			);
 			path = Model;
@@ -379,7 +376,6 @@
 				E4C9D4CA23CA128A00E94A9B /* SignInViewController.swift in Sources */,
 				BC723CA72412A11100184B05 /* LocationService.swift in Sources */,
 				E457EA8E23A800B4000A7DE7 /* AppDelegate.swift in Sources */,
-				BC95F6B32439EC8600B77377 /* UItoast.swift in Sources */,
 				BCCBE1A42404022C00951426 /* addPostViewController.swift in Sources */,
 				BC28C8FF2405824000ECF857 /* ProductCell.swift in Sources */,
 				E457EA9023A800B4000A7DE7 /* SceneDelegate.swift in Sources */,
