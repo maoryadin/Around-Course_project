@@ -12,34 +12,51 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class RegisterViewController: UIViewController {
-
+    
     var db:Firestore!
     var myUser:UserData!
+
+    // field views
+    @IBOutlet weak var emailView: UIView!
+    @IBOutlet weak var passwordView: UIView!
+    @IBOutlet weak var usernameView: UIView!
+    @IBOutlet weak var ageView: UIView!
+    @IBOutlet weak var firstnameView: UIView!
+    @IBOutlet weak var lastnameView: UIView!
     
-    
+    // fields
     @IBOutlet weak var usernameField: UITextField!
-    
     @IBOutlet weak var emailField: UITextField!
-    
     @IBOutlet weak var passwordField: UITextField!
-    
     @IBOutlet weak var ageField: UITextField!
-    
     @IBOutlet weak var firstNameField: UITextField!
-    
     @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var registerBtn: UIButton!
+    
+    
+    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var errorMessage: UILabel!
+    
     
     var imageView = UIImageView()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        errorView.alpha = 0
         
-//           let settings = FirestoreSettings()
-//
-//          Firestore.firestore().settings = settings
-//            // [END setup]
-//          db = Firestore.firestore()
+        let fieldRadius = 8
+        let buttonRadius = 4
+        emailView.layer.cornerRadius = CGFloat(fieldRadius)
+        passwordView.layer.cornerRadius = CGFloat(fieldRadius)
+        usernameView.layer.cornerRadius = CGFloat(fieldRadius)
+        ageView.layer.cornerRadius = CGFloat(fieldRadius)
+        firstnameView.layer.cornerRadius = CGFloat(fieldRadius)
+        lastnameView.layer.cornerRadius = CGFloat(fieldRadius)
+        registerBtn.layer.cornerRadius = CGFloat(buttonRadius)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     
@@ -49,9 +66,13 @@ class RegisterViewController: UIViewController {
             myUser = UserData(first: firstNameField.text!, last: lastNameField.text!, profilePic: "", email: emailField.text!, uid: "", age: ageField.text!, username: usernameField.text!)
             
             FireBaseManager.CreateAccount(email: emailField.text!, password: passwordField.text!,_user:myUser) {
-                        (result:String) in
+                        (result, error) in
+                if (error != "") {
+                    self.errorView.alpha = 1
+                    self.errorMessage.text = error
+                }
                 DispatchQueue.main.async{
-                    FireBaseManager.Login(email: self.emailField.text!, password: self.passwordField.text!) { (success:Bool) in
+                    FireBaseManager.Login(email: self.emailField.text!, password: self.passwordField.text!) { (success:Bool, error: String) in
                         
                         if(success){
                             print("success login from register")
@@ -70,9 +91,7 @@ class RegisterViewController: UIViewController {
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-
-        
+        self.errorView.alpha = 0
     }
     
     @IBAction func backBarItem(_ sender: Any) {
