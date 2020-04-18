@@ -86,16 +86,19 @@ signOutBtn.image?.withRenderingMode(.alwaysOriginal)
                 let signInController = SignInViewController()
                 let signInNavigationController = UINavigationController(rootViewController: signInController)
                 let parent = self.parent!
-                parent.dismiss(animated: true, completion: {
-                    self.userData = nil
-                    self.email = nil
-                    self.uid = nil
-                    self.postsRef = nil
-                    self.ref = nil
-                    self.listener?.remove()
-                    self.present(signInNavigationController, animated: true, completion: nil)
+                PostManager.posts = []
+                let defaults = UserDefaults.standard
+                defaults.removeObject(forKey: "email")
+                defaults.removeObject(forKey: "password")
+                defaults.synchronize()
+                self.dismiss(animated: true, completion: {
 
+                    parent.dismiss(animated: true, completion: {
+                        self.present(signInNavigationController, animated: true, completion: nil)
+
+                    })
                 })
+
             } catch let err {
                 print(err)
         }}
