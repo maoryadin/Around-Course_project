@@ -19,14 +19,14 @@ class FireBaseManager: NSObject {
     static var db:Firestore! = Firestore.firestore()
     let settings = FirestoreSettings()
 
-    static func Login(email:String,password:String, completion:
-        @escaping (_ success:Bool) -> Void) {
+    static func Login(email: String, password: String ,completion:
+        @escaping (_ success: Bool, _ error: String) -> Void) {
 
         Auth.auth().signIn(withEmail: email, password: password,
                            completion: { (user, error) in
                             if let error = error {
                                 print(error.localizedDescription)
-                                completion(false)
+                                completion(false, error.localizedDescription)
                             } else {
                                 currentUser = user?.user
                                 currentUserId = (((user?.user.uid)!))
@@ -36,7 +36,7 @@ class FireBaseManager: NSObject {
                                 if(userDB != nil) {
                                    self.user = userDB
                                     db = Firestore.firestore()
-                                    completion(true)
+                                    completion(true, "")
                                     return
                                 }
                                 let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
@@ -48,48 +48,22 @@ class FireBaseManager: NSObject {
                                         self.user = UserData(json: dataDescription!)
                                         UserData.addToDb(user: self.user!)
                                         db = Firestore.firestore()
-                                        completion(true)
+                                        completion(true, "")
                                     }
                                 }
                                // completion(true)
                             }
 
         })
-//    }
-//    static func Login(email:String,password:String, completion:
-//        @escaping (_ success:Bool) -> Void) {
-//
-//        Auth.auth().signIn(withEmail: email, password: password,
-//                           completion: { (user, error) in
-//                            if let error = error {
-//                                print(error.localizedDescription)
-//                                completion(false)
-//                            } else {
-//                                currentUser = user?.user
-//                                currentUserId = (((user?.user.uid)!))
-//                                //Get specific document from current user
-//                                let docRef = Firestore.firestore().collection("Users").document(Auth.auth().currentUser?.uid ?? "")
-//
-//                                // Get data
-//                                docRef.getDocument { (document, error) in
-//                                    if let document = document, document.exists {
-//                                        let dataDescription = document.data()
-//                                        self.user = UserData(json: dataDescription!)
-//                                    }
-//                                }
-//                                completion(true)
-//                            }
-//
-//        })
     }
 
     static func CreateAccount(email:String, password:String,_user:UserData, completion:
-            @escaping (_ result:String) -> Void) {
-            
-            
+        @escaping (_ result: String, _ error: String) -> Void) {
+        
             Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
                 if let error = error {
                         print(error.localizedDescription)
+                    completion("fail", error.localizedDescription)
                             return
                         }
                 _user.uid = Auth.auth().currentUser!.uid
@@ -98,8 +72,6 @@ class FireBaseManager: NSObject {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
-                        completion("success")
-
                     }
                 }
         }

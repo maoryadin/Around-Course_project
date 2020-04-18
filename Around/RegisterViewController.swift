@@ -33,10 +33,16 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var registerBtn: UIButton!
     
+    
+    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var errorMessage: UILabel!
+    
+    
     var imageView = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        errorView.alpha = 0
         
         let fieldRadius = 8
         let buttonRadius = 4
@@ -49,6 +55,10 @@ class RegisterViewController: UIViewController {
         registerBtn.layer.cornerRadius = CGFloat(buttonRadius)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     
     @IBAction func registerOnClick(_ sender: Any) {
         
@@ -56,9 +66,13 @@ class RegisterViewController: UIViewController {
             myUser = UserData(first: firstNameField.text!, last: lastNameField.text!, profilePic: "", email: emailField.text!, uid: "", age: ageField.text!, username: usernameField.text!)
             
             FireBaseManager.CreateAccount(email: emailField.text!, password: passwordField.text!,_user:myUser) {
-                        (result:String) in
+                        (result, error) in
+                if (error != "") {
+                    self.errorView.alpha = 1
+                    self.errorMessage.text = error
+                }
                 DispatchQueue.main.async{
-                    FireBaseManager.Login(email: self.emailField.text!, password: self.passwordField.text!) { (success:Bool) in
+                    FireBaseManager.Login(email: self.emailField.text!, password: self.passwordField.text!) { (success:Bool, error: String) in
                         
                         if(success){
                             print("success login from register")
@@ -77,9 +91,7 @@ class RegisterViewController: UIViewController {
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-
-        
+        self.errorView.alpha = 0
     }
     
     @IBAction func backBarItem(_ sender: Any) {

@@ -19,92 +19,59 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
+    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var errorMessage: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        errorView.alpha = 0
         
         let fieldRadius = 8
         let buttonRadius = 4
         emailView.layer.cornerRadius = CGFloat(fieldRadius)
         passwordView.layer.cornerRadius = CGFloat(fieldRadius)
         loginBtn.layer.cornerRadius = CGFloat(buttonRadius)
+        errorView.layer.cornerRadius = CGFloat(buttonRadius)
     
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBAction func loginButton_Click(_ sender: Any) {
-        
-        
-        FireBaseManager.Login(email: emailTF.text!, password: passwordTF.text!) { (success:Bool) in
-            
+        FireBaseManager.Login(email: emailTF.text!, password: passwordTF.text!) { (success: Bool, error: String) in
             if(success){
                 print("success login")
-                //self.setData()
                 self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
-
+            } else {
+                self.errorView.alpha = 1
+                self.errorMessage.text = error
             }
         }
     }
     
+    @IBAction func createAccountButton_Click(_ sender: Any) {
+        performSegue(withIdentifier: "registerSegue", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        self.errorView.alpha = 0
         print("before perpare")
         if segue.identifier  == "showProfileLogIn" {
             
             print("we in segue destination to profile!")
-            
         }
         print("after perpare")
-
         }
-    
-//    func setData() {
-//        print("befor set data")
-//        let uid = Auth.auth().currentUser?.uid
-//         print(uid!)
-//        let docRef = self.db.collection("Users").document(uid!)
-//                 docRef.getDocument { (document, error) in
-//                     if let document = document, document.exists {
-//                         let dataDescription = document.data()!
-//
-//
-//
-//    self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
-//            }
-//
-//        }
-//
-//        print("after set data")
-//}
-//
-
-        
-
-    
-    @IBAction func createAccountButton_Click(_ sender: Any) {
-        
- //       print("!!!!!")
-        performSegue(withIdentifier: "registerSegue", sender: self)
-//
-//        FireBaseManager.CreateAccount(email: emailTF.text!, password: passwordTF.text!) {
-//            (result:String) in
-//            DispatchQueue.main.async {
-//                self.performSegue(withIdentifier: "showProfile", sender: sender)
-//            }
-//        }
-        
-    }
-
-    
 
     override func shouldPerformSegue(withIdentifier: String, sender: Any?) -> Bool {
-        
         print("going to cancel")
-
         if(withIdentifier == "showProfileLogIn") {
             return false
         }
-
         return true;
     }
-
-
+    
 }
