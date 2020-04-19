@@ -18,6 +18,8 @@ target 'Around' do
   pod 'Kingfisher', '~> 5.13'
 pod "Pastel"
    pod 'IBAnimatable'
+   pod 'Sica'
+
 
 
   
