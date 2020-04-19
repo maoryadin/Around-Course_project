@@ -72,6 +72,7 @@ class FireBaseManager: NSObject {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
+                        completion("success","")
                     }
                 }
         }

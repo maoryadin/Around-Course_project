@@ -309,6 +309,7 @@ PODS:
   - nanopb/encode (0.3.9011)
   - Pastel (0.6.0)
   - PromisesObjC (1.2.8)
+  - Sica (0.4.1)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
@@ -324,6 +325,7 @@ DEPENDENCIES:
   - IBAnimatable
   - Kingfisher (~> 5.13)
   - Pastel
+  - Sica
   - SQLite.swift
 
 SPEC REPOS:
@@ -357,6 +359,7 @@ SPEC REPOS:
     - nanopb
     - Pastel
     - PromisesObjC
+    - Sica
     - SQLite.swift
 
 SPEC CHECKSUMS:
@@ -389,8 +392,9 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  Sica: 1a76eae2d819ea30688bb073f502a1f47e421cdd
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
 
-PODFILE CHECKSUM: 8db59ba54ad5bfc3ed01d777b683cedffe87b5f1
+PODFILE CHECKSUM: b61f437c760fbb265cef25a7094249b43a2c7424
 
 COCOAPODS: 1.9.1

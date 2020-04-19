@@ -5,6 +5,8 @@ import FirebaseAuth
 import FirebaseDatabase
 import Pastel
 import IBAnimatable
+import Sica
+
 class SignInViewController: UIViewController {
 
     var db:Firestore!
@@ -16,6 +18,11 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var passwordView: UIView!
     @IBOutlet weak var emailView: UIView!
     var defaults = UserDefaults.standard
+
+
+
+    //@IBOutlet weak var emailTF: UITextField!
+
     
     // fields
     @IBOutlet weak var emailTF: UITextField!
@@ -27,6 +34,19 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let sampleView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        sampleView.center.x = self.view.frame.width / 2
+        sampleView.center.y = self.view.frame.height / 2
+        sampleView.backgroundColor = .none
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        imageView.image = UIImage(named: "logo_arround")
+        sampleView.addSubview(imageView)
+        view.addSubview(sampleView)
+        let animator = Animator(view: sampleView)
+        animator
+            .addBasicAnimation(keyPath: .positionY, from: 50, to: 220, duration: 2, timingFunction: .easeInOutCubic)
+           
+            .run(type: .sequence)
         
         errorView.alpha = 0
         
@@ -43,19 +63,7 @@ class SignInViewController: UIViewController {
 
 
     }
-    override func viewWillAppear(_ animated: Bool) {
-         defaults = UserDefaults.standard
-        let email = defaults.object(forKey: "email") as? String ?? ""
-        let password = defaults.object(forKey: "password") as? String ?? ""
-        print(email)
-        print(password)
-        if(email != "" && password != "")
-        {
-            FireBaseManager.Login(email: email, password: password, completion: {_,_  in
-                self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
-            })
-        }
-    }
+
     
     override func viewWillAppear(_ animated: Bool) {
          defaults = UserDefaults.standard
@@ -65,9 +73,10 @@ class SignInViewController: UIViewController {
         print(password)
         if(email != "" && password != "")
         {
-            FireBaseManager.Login(email: email, password: password, completion: {_ in
+            FireBaseManager.Login(email: email, password: password, completion: {(success: Bool, error: String) in
+                if(success){
                 self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
-            })
+                }})
         }
 
     }
