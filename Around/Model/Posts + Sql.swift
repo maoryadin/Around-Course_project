@@ -82,5 +82,27 @@ static func create_table(database: OpaquePointer?){
         sqlite3_finalize(sqlite3_stmt)
 
         }
+    
+      static func updateByTime(post:Post){
+
+        var sqlite3_stmt: OpaquePointer? = nil
+        if (sqlite3_prepare_v2(ModelSql.instance.database,"INSERT OR REPLACE INTO posts(time, uid, username, text, imageRef, lat, long) VALUES (?,?,?,?,?,?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK){
+           
+           
+           sqlite3_bind_text(sqlite3_stmt, 1, (post.time as NSString).utf8String,-1,nil);
+           sqlite3_bind_text(sqlite3_stmt, 2, (post.uid as NSString).utf8String,-1,nil);
+           sqlite3_bind_text(sqlite3_stmt, 3, (post.username as NSString).utf8String,-1,nil);
+           sqlite3_bind_text(sqlite3_stmt, 4, (post.text as NSString).utf8String,-1,nil);
+           sqlite3_bind_text(sqlite3_stmt, 5, (post.imageRef as NSString).utf8String,-1,nil);
+           sqlite3_bind_double(sqlite3_stmt, 6, post.lat);
+           sqlite3_bind_double(sqlite3_stmt, 7, post.long);
+
+            if(sqlite3_step(sqlite3_stmt) == SQLITE_DONE){
+                print("new row added succefully")
+            }
+        }
+           
+        sqlite3_finalize(sqlite3_stmt)
+    }
     }
  

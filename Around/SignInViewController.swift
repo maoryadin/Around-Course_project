@@ -30,32 +30,18 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var errorMessage: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let sampleView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-        sampleView.center.x = self.view.frame.width / 2
-        sampleView.center.y = self.view.frame.height / 2
-        sampleView.backgroundColor = .none
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-        imageView.image = UIImage(named: "logo_arround")
-        sampleView.addSubview(imageView)
-        view.addSubview(sampleView)
-        let animator = Animator(view: sampleView)
-        animator
-            .addBasicAnimation(keyPath: .positionY, from: 50, to: 220, duration: 2, timingFunction: .easeInOutCubic)
-           
-            .run(type: .sequence)
+            errorView.alpha = 0
+            
+            let fieldRadius = 8
+            let buttonRadius = 4
+            emailView.layer.cornerRadius = CGFloat(fieldRadius)
+            passwordView.layer.cornerRadius = CGFloat(fieldRadius)
+            loginBtn.layer.cornerRadius = CGFloat(buttonRadius)
         
-        errorView.alpha = 0
         
-        let fieldRadius = 8
-        let buttonRadius = 4
-        emailView.layer.cornerRadius = CGFloat(fieldRadius)
-        passwordView.layer.cornerRadius = CGFloat(fieldRadius)
-        loginBtn.layer.cornerRadius = CGFloat(buttonRadius)
-    
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

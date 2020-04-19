@@ -8,7 +8,6 @@ class PostCell : UITableViewCell {
     
  var post : Post! {
  didSet {
-    
     FireBaseManager.getRef(path: post?.imageRef).downloadURL(completion: {
         url, error in
             if error != nil {
@@ -18,13 +17,15 @@ class PostCell : UITableViewCell {
                 self.postImage.kf.setImage(with:url!)
                 self.postNameLabel.text = self.post!.username
                 self.postDescriptionLabel.text = self.post!.text
+            
           }
         })
     
  }
 }
  
- private let postNameLabel : UILabel = {
+ public var myimage:UIImage? = nil
+ public let postNameLabel : UILabel = {
  let lbl = UILabel()
  lbl.textColor = .black
  lbl.font = UIFont.boldSystemFont(ofSize: 16)
@@ -33,7 +34,7 @@ class PostCell : UITableViewCell {
  }()
  
  
- private let postDescriptionLabel : UILabel = {
+ public let postDescriptionLabel : UILabel = {
  let lbl = UILabel()
  lbl.textColor = .black
  lbl.font = UIFont.systemFont(ofSize: 16)
@@ -42,7 +43,7 @@ class PostCell : UITableViewCell {
  return lbl
  }()
     
-    private let postImage : UIImageView = {
+    public let postImage : UIImageView = {
     let imgView = UIImageView(image: #imageLiteral(resourceName: "profileImage"))
         imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
@@ -53,6 +54,7 @@ class PostCell : UITableViewCell {
  
  
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        myimage = postImage.image
  super.init(style: style, reuseIdentifier: reuseIdentifier)
  addSubview(postImage)
  addSubview(postNameLabel)

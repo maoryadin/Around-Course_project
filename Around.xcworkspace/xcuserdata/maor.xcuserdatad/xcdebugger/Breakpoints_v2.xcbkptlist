@@ -23,111 +23,63 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FF913CCF-3586-4E36-B736-98ADA3287CF6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Around/Model/User + Sql.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "getDownloadURLfromDb()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CD237751-1E3C-419A-A26B-3B12E7852D06"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Around/Model/User + Sql.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "getDownloadURLfromDb()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F7EC2F19-AA2E-4279-8EE2-825068A6B0C3"
+            uuid = "04303DD2-F654-478A-9614-96E74271AB45"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Around/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "initProfilePicCache()"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "createProductArray()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1CEC0226-44F3-4090-8D94-4FE388C61118"
+            uuid = "420E448F-1540-48B0-82BD-CD52582B7ADD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Around/SignInViewController.swift"
+            filePath = "Around/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2A315B66-3658-496F-B508-190A3FAB3F30"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Around/SignInViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "createProductArray()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "2A315B66-3658-496F-B508-190A3FAB3F30 - bbe5545c8425eaf8"
+                  uuid = "420E448F-1540-48B0-82BD-CD52582B7ADD - d98d6985a215c871"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Around.SignInViewController.loginButton_Click(Any) -&gt; ()"
+                  symbolName = "closure #1 (__C.FIRDocumentChange) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Around.ProfileViewController.createProductArray() -&gt; ()"
                   moduleName = "Around"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maor/Desktop/Around/Around/SignInViewController.swift"
+                  urlString = "file:///Users/maor/Desktop/Around/Around/ProfileViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "96">
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
+                  offsetFromSymbolStart = "251">
                </Location>
                <Location
-                  uuid = "2A315B66-3658-496F-B508-190A3FAB3F30 - d9f432f3a5b4779b"
+                  uuid = "420E448F-1540-48B0-82BD-CD52582B7ADD - c2734ff9e0f4425c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool) -&gt; () in Around.SignInViewController.loginButton_Click(Any) -&gt; ()"
+                  symbolName = "closure #1 (Around.Post) -&gt; Swift.Bool in closure #1 (__C.FIRDocumentChange) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Around.ProfileViewController.createProductArray() -&gt; ()"
                   moduleName = "Around"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maor/Desktop/Around/Around/SignInViewController.swift"
+                  urlString = "file:///Users/maor/Desktop/Around/Around/ProfileViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "89">
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
+                  offsetFromSymbolStart = "37">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -135,33 +87,97 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "532AEDBF-7E65-4EEF-89D1-3F3AED6C2B33"
+            uuid = "23D46C6F-2EBE-4B20-8545-C30038E26611"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Around/SignInViewController.swift"
+            filePath = "Around/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "SignInViewController"
-            landmarkType = "3">
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "createProductArray()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "23D46C6F-2EBE-4B20-8545-C30038E26611 - d98d6985a215c871"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRDocumentChange) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Around.ProfileViewController.createProductArray() -&gt; ()"
+                  moduleName = "Around"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maor/Desktop/Around/Around/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "2222">
+               </Location>
+               <Location
+                  uuid = "23D46C6F-2EBE-4B20-8545-C30038E26611 - b01ace51c786a83f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Around.Post) -&gt; Swift.Bool in closure #1 (__C.FIRDocumentChange) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Around.ProfileViewController.createProductArray() -&gt; ()"
+                  moduleName = "Around"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maor/Desktop/Around/Around/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "37">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "90993B2C-589A-460A-9B72-08207742EBD7"
+            uuid = "70B0E745-B2E1-423D-B89F-9E6EF5035768"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Around/SignInViewController.swift"
+            filePath = "Around/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "preferredStatusBarStyle"
-            landmarkType = "24">
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "createProductArray()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "77FF61D9-5B9E-4F00-977D-FC3BE3120A2C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Around/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "createProductArray()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F3F5445E-BF2A-41AD-90CE-C0C2C73BD0F9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Around/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "createProductArray()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

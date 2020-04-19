@@ -118,22 +118,21 @@ class FireBaseManager: NSObject {
     }
 }
     
-    static func getImageFromStorage(ref:StorageReference) -> UIImage? {
+    static func getImageFromStorage(ref:StorageReference, completion:
+        @escaping (_ result: UIImage?) -> Void) {
 
         var image:UIImage?
                     ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
                         if error != nil {
                             print("error")
-                        image = nil
-                            return
+                        completion(nil)
                       } else {
                             print("success")
                            image = UIImage(data: data!)
-                            return
+                            completion(image)
                       }
                     }
 
-            return image
 
     }
     static func deleteFrom(collection:String,document:String){
