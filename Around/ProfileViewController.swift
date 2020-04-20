@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
         db = Firestore.firestore()
         let settings = FirestoreSettings()
         PostManager.posts.append(contentsOf: Post.getAllPostsFromDb())
-        self.tb.reloadData()
+        filterList()
         createProductArray()
         tb.register(PostCell.self, forCellReuseIdentifier: cellId)
         Firestore.firestore().settings = settings
@@ -173,14 +173,14 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource,UITableViewDelegate
 {
-// <<<<<<< design
+
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 //         if editingStyle == UITableViewCell.EditingStyle.delete {
 //             let key = "\(PostManager.posts[indexPath.row].uid)_\(PostManager.posts[indexPath.row].time)"
-// =======
-    
+//
+//        }}
     func filterList() { // should probably be called sort and not filter
-        PostManager.posts.sort { $0.time < $1.time }
+        PostManager.posts.sort { $0.time > $1.time }
         tb.reloadData(); // notify the table view the data has changed
     }
     

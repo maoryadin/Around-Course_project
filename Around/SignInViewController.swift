@@ -7,7 +7,7 @@ import Pastel
 import IBAnimatable
 import Sica
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController,UITextFieldDelegate {
 
     var db:Firestore!
     var userData:UserData!
@@ -28,7 +28,8 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var errorMessage: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.emailTF.delegate = self
+        self.passwordTF.delegate = self
         errorView.alpha = 0
         let fieldRadius = 8
         emailView.layer.cornerRadius = CGFloat(fieldRadius)
@@ -46,6 +47,10 @@ class SignInViewController: UIViewController {
         return .lightContent
 
 
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     override func viewWillAppear(_ animated: Bool) {

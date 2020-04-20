@@ -13,12 +13,14 @@ import FirebaseAuth
 import FirebaseDatabase
 import CoreLocation
 
-class addPostViewController: UIViewController, CLLocationManagerDelegate {
+class addPostViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var contentTextField: UITextView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var postBtn: UIButton!
+
+    @IBOutlet weak var addImageBtn: UIButton!
     
     var post:Post?
     var from:ProfileViewController?
@@ -26,11 +28,12 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     var imagePicker:UIImagePickerController!
     var activityView:UIActivityIndicatorView!
-    @IBOutlet weak var textPostField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.contentTextField.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
+
         // add image
         imageView.layer.borderColor = UIColor.init(hexString: "006FFB").cgColor
         imageView.layer.borderWidth = 1
@@ -40,16 +43,20 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
         contentView.layer.cornerRadius = 8
         
         // post button
+        addImageBtn.layer.cornerRadius = addImageBtn.frame.size.height/2
+        addImageBtn.layer.masksToBounds = true
         postBtn.layer.cornerRadius =  postBtn.frame.size.height/2
         postBtn.layer.masksToBounds = true
         let lightBlue = UIColor.init(hexString: "006FFB")
         let darkBlue = UIColor.init(hexString: "0053F5")
         postBtn.setGradientLayer(colorOne: lightBlue, colorTwo: darkBlue)
-        
+        addImageBtn.setGradientLayer(colorOne: lightBlue, colorTwo: darkBlue)
         let imageTap = UITapGestureRecognizer(target:self,action: #selector(openImagePicker))
 
-          imageView.isUserInteractionEnabled = true
+          
+            //imageView.isUserInteractionEnabled = true
           imageView.addGestureRecognizer(imageTap)
+        addImageBtn.addGestureRecognizer(imageTap)
           //imageView.layer.cornerRadius = imageView.bounds.height / 2
           imageView.clipsToBounds = true
 
@@ -64,11 +71,14 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    @objc func tapDone(sender: Any) {
+        self.view.endEditing(true)
+    }
     
     func updatePost(post:PostCell) {
         self.post = postCell?.post
-        self.textPostField.text = self.post?.text
-        var ref:StorageReference? = FireBaseManager.getRef(path: self.post?.imageRef)
+        self.contentTextField.text = self.post?.text
+        let ref:StorageReference? = FireBaseManager.getRef(path: self.post?.imageRef)
         FireBaseManager.getImageFromStorage(ref: ref!){
             image in
         
@@ -95,7 +105,7 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
                 let lat = loc!.coordinate.latitude
                 let long = loc!.coordinate.longitude
                 let currentDate = NSDate.now
-                toPost?.text = "\(textPostField.text!)"
+                toPost?.text = "\(contentTextField.text!)"
                 toPost?.username = FireBaseManager.user!.username
                 toPost?.time = currentDate.timeIntervalSince1970.description
                 toPost?.imageRef = ("account/\(toPost!.uid)/posts/\(toPost!.time)/postImage.jpeg")
@@ -128,7 +138,7 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
         let long = loc!.coordinate.longitude
 
  //       let currentDate = NSDate.now
-        post?.text = "\(textPostField.text!)"
+        post?.text = "\(contentTextField.text!)"
         post?.username = FireBaseManager.user!.username
 //        post?.time = currentDate.timeIntervalSince1970.description
         post?.imageRef = ("account/\(post!.uid)/posts/\(post!.time)/postImage.jpeg")

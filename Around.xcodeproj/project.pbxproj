@@ -24,6 +24,7 @@
 		BC723CA92412A79D00184B05 /* AroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC723CA82412A79D00184B05 /* AroundViewController.swift */; };
 		BC723CAB2412A86800184B05 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC723CAA2412A86800184B05 /* MapKit.framework */; };
 		BC723CAF2412B7A900184B05 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC723CAE2412B7A900184B05 /* UserAnnotation.swift */; };
+		BC8413DD244E60900024FDA1 /* UITextView + Done.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8413DC244E608F0024FDA1 /* UITextView + Done.swift */; };
 		BC84B7B023F98BFD001A5EBF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC84B7AF23F98BFD001A5EBF /* ProfileViewController.swift */; };
 		BCA7EBA224222B1400BC3A69 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7EBA124222B1400BC3A69 /* DBManager.swift */; };
 		BCB324FD243608670044E5AD /* User + Sql.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB324FC243608670044E5AD /* User + Sql.swift */; };
@@ -83,6 +84,7 @@
 		BC723CA82412A79D00184B05 /* AroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundViewController.swift; sourceTree = "<group>"; };
 		BC723CAA2412A86800184B05 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		BC723CAE2412B7A900184B05 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
+		BC8413DC244E608F0024FDA1 /* UITextView + Done.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView + Done.swift"; sourceTree = "<group>"; };
 		BC84B7AF23F98BFD001A5EBF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BCA7EBA124222B1400BC3A69 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		BCB324FC243608670044E5AD /* User + Sql.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User + Sql.swift"; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				BCDC50B12435EE9C0099E6C2 /* UIimage + Extension.swift */,
 				BCE092B62441F7F000BD4730 /* Service.swift */,
 				E473B9C4244C57EF000F325A /* UiView.swift */,
+				BC8413DC244E608F0024FDA1 /* UITextView + Done.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				BC151A2F2402A26D005CCCB0 /* FireStoreManager.swift in Sources */,
 				BCDC50B22435EE9C0099E6C2 /* UIimage + Extension.swift in Sources */,
 				BC54D0222445E28F00921363 /* PopUpPostViewController.swift in Sources */,
+				BC8413DD244E60900024FDA1 /* UITextView + Done.swift in Sources */,
 				BC28C8FD2405808500ECF857 /* extention.swift in Sources */,
 				BCB77831241417FA00F3617F /* Artwork.swift in Sources */,
 				BC173D8423FC253100A21104 /* RegisterViewController.swift in Sources */,
