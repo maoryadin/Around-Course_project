@@ -14,21 +14,40 @@ import FirebaseDatabase
 import CoreLocation
 
 class addPostViewController: UIViewController, CLLocationManagerDelegate {
-
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var contentTextField: UITextView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var postBtn: UIButton!
+    
     var post:Post?
     var from:ProfileViewController?
     var postCell:PostCell?
     let locationManager = CLLocationManager()
-    @IBOutlet weak var imageView: UIImageView!
     var imagePicker:UIImagePickerController!
     var activityView:UIActivityIndicatorView!
     @IBOutlet weak var textPostField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // add image
+        imageView.layer.borderColor = UIColor.init(hexString: "006FFB").cgColor
+        imageView.layer.borderWidth = 1
+        imageView.layer.cornerRadius = 8
+        
+        // content field
+        contentView.layer.cornerRadius = 8
+        
+        // post button
+        postBtn.layer.cornerRadius =  postBtn.frame.size.height/2
+        postBtn.layer.masksToBounds = true
+        let lightBlue = UIColor.init(hexString: "006FFB")
+        let darkBlue = UIColor.init(hexString: "0053F5")
+        postBtn.setGradientLayer(colorOne: lightBlue, colorTwo: darkBlue)
         
         let imageTap = UITapGestureRecognizer(target:self,action: #selector(openImagePicker))
+
           imageView.isUserInteractionEnabled = true
           imageView.addGestureRecognizer(imageTap)
           //imageView.layer.cornerRadius = imageView.bounds.height / 2
@@ -60,11 +79,13 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+
     @objc func openImagePicker(_ sender:Any) {
         //locationManager.startUpdatingLocation()
           self.present(imagePicker,animated: true,completion: nil)
       }
     
+
     
     
     func createNewPost() {
@@ -105,6 +126,7 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
         let loc =  LocationService.sharedInstance.locationManager.location
         let lat = loc!.coordinate.latitude
         let long = loc!.coordinate.longitude
+
  //       let currentDate = NSDate.now
         post?.text = "\(textPostField.text!)"
         post?.username = FireBaseManager.user!.username
@@ -118,6 +140,7 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
                     let ref = FireBaseManager.getRef(path: post?.imageRef)
                     FireBaseManager.uploadFile(data: data, ref: ref,completion: {
                         
+
                         FireBaseManager.db.collection("Posts").document("\(self.post!.uid)_\(self.post!.time)").updateData(self.post!.toJson(), completion: {(error) in
                             if error == nil {
                                     print("updated successfully")

@@ -45,14 +45,19 @@ class RegisterViewController: UIViewController {
         errorView.alpha = 0
         
         let fieldRadius = 8
-        let buttonRadius = 4
         emailView.layer.cornerRadius = CGFloat(fieldRadius)
         passwordView.layer.cornerRadius = CGFloat(fieldRadius)
         usernameView.layer.cornerRadius = CGFloat(fieldRadius)
         ageView.layer.cornerRadius = CGFloat(fieldRadius)
         firstnameView.layer.cornerRadius = CGFloat(fieldRadius)
         lastnameView.layer.cornerRadius = CGFloat(fieldRadius)
-        registerBtn.layer.cornerRadius = CGFloat(buttonRadius)
+        
+        registerBtn.layer.cornerRadius = registerBtn.frame.size.height/2
+        registerBtn.layer.masksToBounds = true
+        
+        let lightBlue = UIColor.init(hexString: "006FFB")
+        let darkBlue = UIColor.init(hexString: "0053F5")
+        registerBtn.setGradientLayer(colorOne: lightBlue, colorTwo: darkBlue)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -84,11 +89,9 @@ class RegisterViewController: UIViewController {
                             print("error register")
                         }
                     }
-            }
+                }
             }
         }
-
-        
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.errorView.alpha = 0
