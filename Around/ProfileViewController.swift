@@ -15,20 +15,16 @@ import CoreLocation
 
 class ProfileViewController: UIViewController {
     @IBOutlet weak var addPostBtn: UIBarButtonItem!
-    
     @IBOutlet weak var signOutBtn: UIBarButtonItem!
-    
     @IBOutlet weak var tb: UITableView!
+    
     var db:Firestore!
     var userData:UserData?
     let cellId = "photoCell"
     //var products : [Product] = [Product]()
     
-    @IBOutlet weak var firstNameLabel: UILabel!
-    
-    @IBOutlet weak var lastNameLabel: UILabel!
     @IBOutlet weak var ProfileImageView: UIImageView!
-    
+    @IBOutlet weak var fullnameLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     
     var imagePicker:UIImagePickerController!
@@ -39,21 +35,24 @@ class ProfileViewController: UIViewController {
     var ref:StorageReference? = FireBaseManager.getRef(path: FireBaseManager.user?.profilePicRef)
     var listener:ListenerRegistration?
     
-        override func viewDidLoad() {
-        super.viewDidLoad()
-addPostBtn.image?.withRenderingMode(.alwaysOriginal)
-signOutBtn.image?.withRenderingMode(.alwaysOriginal)
-            db = Firestore.firestore()
-            let settings = FirestoreSettings()
-            PostManager.posts.append(contentsOf: Post.getAllPostsFromDb())
-            self.tb.reloadData()
-            createProductArray()
-            tb.register(PostCell.self, forCellReuseIdentifier: cellId)
-          Firestore.firestore().settings = settings
+    override func viewDidLoad() {
+    super.viewDidLoad()
         
-         //getDocumentAndSetData()
-            setData()
-            
+        // navigation
+        addPostBtn.image?.withRenderingMode(.alwaysOriginal)
+        signOutBtn.image?.withRenderingMode(.alwaysOriginal)
+        
+        db = Firestore.firestore()
+        let settings = FirestoreSettings()
+        PostManager.posts.append(contentsOf: Post.getAllPostsFromDb())
+        self.tb.reloadData()
+        createProductArray()
+        tb.register(PostCell.self, forCellReuseIdentifier: cellId)
+        Firestore.firestore().settings = settings
+    
+        //getDocumentAndSetData()
+        setData()
+        
         let imageTap = UITapGestureRecognizer(target:self,action: #selector(openImagePicker))
         ProfileImageView.isUserInteractionEnabled = true
         ProfileImageView.addGestureRecognizer(imageTap)
@@ -62,22 +61,15 @@ signOutBtn.image?.withRenderingMode(.alwaysOriginal)
 
                 
         imagePicker = UIImagePickerController()
-          imagePicker.allowsEditing = true;
+        imagePicker.allowsEditing = true;
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
 
-    }
+}
 
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {}
     
-
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-
-        
-    }
-
+    override func viewWillDisappear(_ animated: Bool) {}
 
     @IBAction func SignOutAction(_ sender: Any) {
 
@@ -104,30 +96,22 @@ signOutBtn.image?.withRenderingMode(.alwaysOriginal)
         }}
 
     func setData() {
-        
-        
         print("setting data in profile")
-        self.firstNameLabel.text = FireBaseManager.user?.first
-        self.lastNameLabel.text = FireBaseManager.user?.last
+        self.fullnameLabel.text = "\(FireBaseManager.user?.first ?? "") \(FireBaseManager.user?.last ?? "")"
         self.ageLabel.text = FireBaseManager.user?.age
-        
         initProfilePicCache()
     }
     
     func initProfilePicCache() {
         let urlDB = UserData.getDownloadURLfromDb()
-
         if (urlDB == nil) {
-
             ref!.downloadURL(completion: { url,error in
                 if(error == nil){
                 self.ProfileImageView.kf.setImage(with: url!)
                     UserData.addToDbDownloadURL(downloadURL: url!.absoluteString)
                 }})
         } else {
-            
             self.ProfileImageView.kf.setImage(with: URL(string: urlDB!))
-
         }
     }
         
@@ -154,7 +138,6 @@ signOutBtn.image?.withRenderingMode(.alwaysOriginal)
                    PostManager.posts.append(post)
                         Post.addToDb(post: post)
                         self.tb.reloadData()
-
                     }
                     
                     if(diff.type == .removed){
@@ -162,19 +145,20 @@ signOutBtn.image?.withRenderingMode(.alwaysOriginal)
                         PostManager.posts.removeAll {$0.time.elementsEqual(time)}
                         Post.deleteByTime(time: time)
                         self.tb.reloadData()
-
+                        
                     }
+                    
                 }
-            }
+                
+        }
         
-}
+    }
 
 
 }
 
 extension ProfileViewController: UITableViewDataSource
 {
-    
    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             let key = "\(PostManager.posts[indexPath.row].uid)_\(PostManager.posts[indexPath.row].time)"

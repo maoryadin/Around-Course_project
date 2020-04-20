@@ -14,18 +14,36 @@ import FirebaseDatabase
 import CoreLocation
 
 class addPostViewController: UIViewController, CLLocationManagerDelegate {
-
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var contentTextField: UITextView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var postBtn: UIButton!
+    
     var post:Post?
     var db:Firestore!
     
     let locationManager = CLLocationManager()
-    @IBOutlet weak var imageView: UIImageView!
     var imagePicker:UIImagePickerController!
     var activityView:UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // add image
+        imageView.layer.borderColor = UIColor.init(hexString: "006FFB").cgColor
+        imageView.layer.borderWidth = 1
+        imageView.layer.cornerRadius = 8
+        
+        // content field
+        contentView.layer.cornerRadius = 8
+        
+        // post button
+        postBtn.layer.cornerRadius =  postBtn.frame.size.height/2
+        postBtn.layer.masksToBounds = true
+        let lightBlue = UIColor.init(hexString: "006FFB")
+        let darkBlue = UIColor.init(hexString: "0053F5")
+        postBtn.setGradientLayer(colorOne: lightBlue, colorTwo: darkBlue)
         
          let settings = FirestoreSettings()
         post = Post(uid: FireBaseManager.user!.uid,username: "", text: "",imageRef: "", time: "",lat: 0,long: 0)
@@ -35,26 +53,19 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
         db = Firestore.firestore()
         
         let imageTap = UITapGestureRecognizer(target:self,action: #selector(openImagePicker))
-          imageView.isUserInteractionEnabled = true
-          imageView.addGestureRecognizer(imageTap)
-          //imageView.layer.cornerRadius = imageView.bounds.height / 2
-          imageView.clipsToBounds = true
-
-                  
-          imagePicker = UIImagePickerController()
-            imagePicker.allowsEditing = true;
-          imagePicker.sourceType = .photoLibrary
-          imagePicker.delegate = self
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(imageTap)
+        imageView.clipsToBounds = true
+        imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true;
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
     }
-    
-    
-    
+
     @objc func openImagePicker(_ sender:Any) {
         //locationManager.startUpdatingLocation()
           self.present(imagePicker,animated: true,completion: nil)
       }
-    
-    @IBOutlet weak var textPostField: UITextField!
     
 
      @IBAction func PostActionButtom_clicked(_ sender: Any) {
@@ -63,7 +74,7 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
         let lat = loc!.coordinate.latitude
         let long = loc!.coordinate.longitude
         let currentDate = NSDate.now
-        post?.text = "\(textPostField.text!)"
+        post?.text = "\(contentTextField.text!)"
         post?.username = FireBaseManager.user!.username
         post?.time = currentDate.timeIntervalSince1970.description
         post?.imageRef = ("account/\(post!.uid)/posts/\(post!.time)/postImage.jpeg")
@@ -77,11 +88,9 @@ class addPostViewController: UIViewController, CLLocationManagerDelegate {
                         
                         self.db.collection("Posts").document("\(self.post!.uid)_\(self.post!.time)").setData((self.post!.toJson()), merge: false, completion: nil)
 })
-                
-
                     }
                     print("collection is created")
-        }
+    }
         
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

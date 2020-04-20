@@ -11,18 +11,14 @@ class SignInViewController: UIViewController {
 
     var db:Firestore!
     var userData:UserData!
+    
+    var defaults = UserDefaults.standard
 
     
     // fields views & btn
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var passwordView: UIView!
     @IBOutlet weak var emailView: UIView!
-    var defaults = UserDefaults.standard
-
-
-
-    //@IBOutlet weak var emailTF: UITextField!
-
     
     // fields
     @IBOutlet weak var emailTF: UITextField!
@@ -33,29 +29,17 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let sampleView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-        sampleView.center.x = self.view.frame.width / 2
-        sampleView.center.y = self.view.frame.height / 2
-        sampleView.backgroundColor = .none
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-        imageView.image = UIImage(named: "logo_arround")
-        sampleView.addSubview(imageView)
-        view.addSubview(sampleView)
-        let animator = Animator(view: sampleView)
-        animator
-            .addBasicAnimation(keyPath: .positionY, from: 50, to: 220, duration: 2, timingFunction: .easeInOutCubic)
-           
-            .run(type: .sequence)
         
         errorView.alpha = 0
-        
         let fieldRadius = 8
-        let buttonRadius = 4
         emailView.layer.cornerRadius = CGFloat(fieldRadius)
         passwordView.layer.cornerRadius = CGFloat(fieldRadius)
-        loginBtn.layer.cornerRadius = CGFloat(buttonRadius)
-    
+        loginBtn.layer.cornerRadius = loginBtn.frame.size.height/2
+        loginBtn.layer.masksToBounds = true
+        
+        let lightBlue = UIColor.init(hexString: "006FFB")
+        let darkBlue = UIColor.init(hexString: "0053F5")
+        loginBtn.setGradientLayer(colorOne: lightBlue, colorTwo: darkBlue)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -63,7 +47,6 @@ class SignInViewController: UIViewController {
 
 
     }
-
     
     override func viewWillAppear(_ animated: Bool) {
          defaults = UserDefaults.standard
@@ -73,12 +56,10 @@ class SignInViewController: UIViewController {
         print(password)
         if(email != "" && password != "")
         {
-            FireBaseManager.Login(email: email, password: password, completion: {(success: Bool, error: String) in
-                if(success){
+            FireBaseManager.Login(email: email, password: password, completion: {_,_  in
                 self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
-                }})
+            })
         }
-
     }
     
     @IBAction func loginButton_Click(_ sender: Any) {
