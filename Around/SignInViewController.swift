@@ -26,7 +26,6 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var errorMessage: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,6 +39,7 @@ class SignInViewController: UIViewController {
         let lightBlue = UIColor.init(hexString: "006FFB")
         let darkBlue = UIColor.init(hexString: "0053F5")
         loginBtn.setGradientLayer(colorOne: lightBlue, colorTwo: darkBlue)
+
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

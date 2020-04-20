@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController {
     var ref:StorageReference? = FireBaseManager.getRef(path: FireBaseManager.user?.profilePicRef)
     var listener:ListenerRegistration?
     
+
     override func viewDidLoad() {
     super.viewDidLoad()
         
@@ -50,7 +51,6 @@ class ProfileViewController: UIViewController {
         tb.register(PostCell.self, forCellReuseIdentifier: cellId)
         Firestore.firestore().settings = settings
     
-        //getDocumentAndSetData()
         setData()
         
         let imageTap = UITapGestureRecognizer(target:self,action: #selector(openImagePicker))
@@ -137,16 +137,28 @@ class ProfileViewController: UIViewController {
                         let post:Post = Post(json: diff.document.data())
                    PostManager.posts.append(post)
                         Post.addToDb(post: post)
-                        self.tb.reloadData()
+
+                        self.filterList()
+
                     }
                     
                     if(diff.type == .removed){
                         let time = diff.document["time"] as! String
                         PostManager.posts.removeAll {$0.time.elementsEqual(time)}
                         Post.deleteByTime(time: time)
-                        self.tb.reloadData()
-                        
+    
+                        self.filterList()
+
                     }
+                    
+                    if(diff.type == .modified) {
+                        let post = Post(json: diff.document.data())
+                        PostManager.posts.removeAll {$0.time.elementsEqual(post.time)}
+                        Post.updateByTime(post: post)
+                        PostManager.posts.append(post)
+                         self.filterList()
+                    }
+                    
                     
                 }
                 
@@ -157,17 +169,57 @@ class ProfileViewController: UIViewController {
 
 }
 
-extension ProfileViewController: UITableViewDataSource
+
+
+extension ProfileViewController: UITableViewDataSource,UITableViewDelegate
 {
-   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCell.EditingStyle.delete {
-            let key = "\(PostManager.posts[indexPath.row].uid)_\(PostManager.posts[indexPath.row].time)"
+// <<<<<<< design
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//         if editingStyle == UITableViewCell.EditingStyle.delete {
+//             let key = "\(PostManager.posts[indexPath.row].uid)_\(PostManager.posts[indexPath.row].time)"
+// =======
+    
+    func filterList() { // should probably be called sort and not filter
+        PostManager.posts.sort { $0.time < $1.time }
+        tb.reloadData(); // notify the table view the data has changed
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+                let editAction = UIContextualAction(style: .destructive, title: "Edit") { (action, view, handler) in
+                    
+                   // let post = PostManager.posts[indexPath.row]
+                    let cell = tableView.cellForRow(at: indexPath) as! PostCell
+                    print("Edit Action Tapped")
+            let storyB = UIStoryboard(name: "Main", bundle: nil)
+            let secondViewController =
+           storyB.instantiateViewController(withIdentifier:
+            "addPostViewController") as! addPostViewController
+
+                    secondViewController.postCell = cell
+                    secondViewController.from = self
+                     self.present(secondViewController, animated: true, completion: nil)
+ 
+                    
+        }
+        editAction.backgroundColor = .green
+        let configuration = UISwipeActionsConfiguration(actions: [editAction])
+        return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, handler) in
+        let key = "\(PostManager.posts[indexPath.row].uid)_\(PostManager.posts[indexPath.row].time)"
             FireBaseManager.deleteFrom(collection: "Posts", document:key)
             Post.deleteByTime(time: PostManager.posts[indexPath.row].time)
             PostManager.posts.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }
+        deleteAction.backgroundColor = .red
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
     }
+
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PostCell
@@ -181,10 +233,6 @@ extension ProfileViewController: UITableViewDataSource
     return PostManager.posts.count
     }
     
-    func tableView(_ tableView: UITableView,
-                   heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
 }
 
 
