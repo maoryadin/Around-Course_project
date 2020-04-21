@@ -565,7 +565,7 @@
                                 </constraints>
                                 <items>
                                     <navigationItem id="epV-u2-vrb">
-                                        <barButtonItem key="leftBarButtonItem" title="Add Post" image="plus.rectangle.fill" catalog="system" id="od4-VJ-Smh">
+                                        <barButtonItem key="leftBarButtonItem" title="Add Post" id="od4-VJ-Smh">
                                             <inset key="imageInsets" minX="0.0" minY="-4" maxX="-20" maxY="0.0"/>
                                             <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
@@ -1035,7 +1035,6 @@
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="plus.rectangle.fill" catalog="system" width="128" height="93"/>
         <image name="rectangle.grid.1x2" catalog="system" width="128" height="101"/>
         <image name="rectangle.grid.1x2.fill" catalog="system" width="128" height="101"/>
         <image name="safari" catalog="system" width="128" height="121"/>
