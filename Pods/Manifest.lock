@@ -302,6 +302,7 @@ PODS:
     - Kingfisher/Core (= 5.13.4)
   - Kingfisher/Core (5.13.4)
   - leveldb-library (1.22)
+  - MBProgressHUD (1.2.0)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -322,6 +323,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - IBAnimatable
   - Kingfisher (~> 5.13)
+  - MBProgressHUD (~> 1.2.0)
   - SQLite.swift
 
 SPEC REPOS:
@@ -352,6 +354,7 @@ SPEC REPOS:
     - IBAnimatable
     - Kingfisher
     - leveldb-library
+    - MBProgressHUD
     - nanopb
     - PromisesObjC
     - SQLite.swift
@@ -383,10 +386,11 @@ SPEC CHECKSUMS:
   IBAnimatable: 99dddd4c0625884a301ba3ecbc1615f8a390368e
   Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
 
-PODFILE CHECKSUM: 2fb8cd20db4b5eac1876c9a65f5dfe6074b588ca
+PODFILE CHECKSUM: 79728564dea641174d09ae1b0e19fa8dd5625321
 
 COCOAPODS: 1.9.1

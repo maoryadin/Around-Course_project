@@ -758,7 +758,6 @@
                                 <state key="normal" title="POST"/>
                                 <connections>
                                     <action selector="PostActionButtom_clicked:" destination="6g6-nS-hf8" eventType="touchUpInside" id="urk-L2-rsj"/>
-                                    <action selector="loginButton_Click:" destination="i7s-bx-EoB" eventType="touchUpInside" id="brQ-Wv-GQ5"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publish New Post" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGY-Lj-jBi">

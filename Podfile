@@ -17,7 +17,7 @@ target 'Around' do
   pod 'SQLite.swift'
   pod 'Kingfisher', '~> 5.13'
    pod 'IBAnimatable'
-
+pod 'MBProgressHUD', '~> 1.2.0'
 
   
 end

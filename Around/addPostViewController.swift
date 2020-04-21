@@ -118,14 +118,26 @@ class addPostViewController: UIViewController {
                             let ref = FireBaseManager.getRef(path: toPost?.imageRef)
                             FireBaseManager.uploadFile(data: data, ref: ref,completion: {
                                 
-                                FireBaseManager.db.collection("Posts").document("\(toPost!.uid)_\(toPost!.time)").setData((toPost!.toJson()), merge: false, completion: nil)
-        })}
+                                FireBaseManager.db.collection("Posts").document("\(toPost!.uid)_\(toPost!.time)").setData((toPost!.toJson()), merge: false, completion:{ error in
+                                    DispatchQueue.main.async {
+
+                                        MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                                        self.dismiss(animated: true, completion: nil)
+
+                                    }
+                                    
+                                })
+        }
+                            )}
         
                   print("collection is created")
-        self.dismiss(animated: true, completion: nil)
     }
 
      @IBAction func PostActionButtom_clicked(_ sender: Any) {
+        DispatchQueue.main.async {
+
+            MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+        }
         if post == nil{
             createNewPost()
             return
@@ -155,13 +167,18 @@ class addPostViewController: UIViewController {
                                     print("updated successfully")
                                 Post.updateByTime(post: self.post!)
                                 self.from?.filterList()
+                                DispatchQueue.main.async {
+
+                                    MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                                    self.dismiss(animated: true, completion: nil)
+
+                                }
                             }
                             else{
                                 print("error updating collection")
                             }
                         })
 })}
-        self.dismiss(animated: true, completion: nil)
                     print("collection is updated")
         }
         

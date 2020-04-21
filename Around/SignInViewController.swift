@@ -54,22 +54,38 @@ class SignInViewController: UIViewController,UITextFieldDelegate {
          defaults = UserDefaults.standard
         let email = defaults.object(forKey: "email") as? String ?? ""
         let password = defaults.object(forKey: "password") as? String ?? ""
+
         print(email)
         print(password)
-        if(email != "" && password != "")
+        if(!email.elementsEqual("") && !password.elementsEqual(""))
         {
-            FireBaseManager.Login(email: email, password: password, completion: {_,_  in
-                self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
-            })
+
+            self.login(email: email, password: password)
+
+
         }
     }
     
     @IBAction func loginButton_Click(_ sender: Any) {
-        FireBaseManager.Login(email: emailTF.text!, password: passwordTF.text!) { (success: Bool, error: String) in
+
+  
+            self.login(email: emailTF.text!, password: passwordTF.text!)
+        
+
+    }
+    
+    func login(email:String,password:String) {
+        DispatchQueue.main.async {
+
+            MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+        }
+        
+        FireBaseManager.Login(email: email, password: password) {
+            (success: Bool, error: String) in
             if(success){
                 print("success login")
-                self.defaults.set(self.emailTF.text!,forKey: "email")
-                self.defaults.set(self.passwordTF.text!,forKey: "password")
+                self.defaults.set(email,forKey: "email")
+                self.defaults.set(password,forKey: "password")
                 self.defaults.synchronize()
                 self.performSegue(withIdentifier: "showProfileLogIn", sender: self)
             } else {
@@ -87,7 +103,10 @@ class SignInViewController: UIViewController,UITextFieldDelegate {
         self.errorView.alpha = 0
         print("before perpare")
         if segue.identifier  == "showProfileLogIn" {
-            
+            DispatchQueue.main.async {
+
+            MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+            }
             print("we in segue destination to profile!")
         }
         print("after perpare")
