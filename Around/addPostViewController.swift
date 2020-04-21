@@ -19,7 +19,7 @@ class addPostViewController: UIViewController {
     @IBOutlet weak var contentTextField: UITextView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var postBtn: UIButton!
-
+    @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var addImageBtn: UIButton!
     
     var post:Post?
@@ -32,10 +32,15 @@ class addPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        postBtn.isEnabled = false
+        let semiBlue = postBtn.backgroundColor?.withAlphaComponent(0.2)
+        postBtn.backgroundColor = semiBlue
+        postBtn.setTitleColor(.white, for: .disabled)
+        
         self.contentTextField.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
 
         // add image
-        imageView.layer.borderColor = UIColor.init(hexString: "006FFB").cgColor
+        imageView.layer.borderColor = UIColor.init(hexString: "EEEFF7").cgColor
         imageView.layer.borderWidth = 1
         imageView.layer.cornerRadius = 8
         
@@ -47,10 +52,6 @@ class addPostViewController: UIViewController {
         addImageBtn.layer.masksToBounds = true
         postBtn.layer.cornerRadius =  postBtn.frame.size.height/2
         postBtn.layer.masksToBounds = true
-        let lightBlue = UIColor.init(hexString: "006FFB")
-        let darkBlue = UIColor.init(hexString: "0053F5")
-        postBtn.setGradientLayer(colorOne: lightBlue, colorTwo: darkBlue)
-        addImageBtn.setGradientLayer(colorOne: lightBlue, colorTwo: darkBlue)
         let imageTap = UITapGestureRecognizer(target:self,action: #selector(openImagePicker))
 
           
@@ -92,14 +93,14 @@ class addPostViewController: UIViewController {
 
     @objc func openImagePicker(_ sender:Any) {
         //locationManager.startUpdatingLocation()
-          self.present(imagePicker,animated: true,completion: nil)
+        self.present(imagePicker,animated: true,completion: nil)
+        
       }
     
 
     
     
     func createNewPost() {
-        
         let toPost:Post? = Post(uid: FireBaseManager.currentUser!.uid, username: FireBaseManager.user!.username, text: "", imageRef: "", time: "", lat: 0, long: 0)
      let loc =  LocationService.sharedInstance.locationManager.location
                 let lat = loc!.coordinate.latitude
@@ -125,8 +126,6 @@ class addPostViewController: UIViewController {
     }
 
      @IBAction func PostActionButtom_clicked(_ sender: Any) {
-        
-
         if post == nil{
             createNewPost()
             return
@@ -190,6 +189,15 @@ extension addPostViewController: UIImagePickerControllerDelegate, UINavigationCo
         picker.dismiss(animated: true, completion: nil)
         
         print("a new photo has been choosed")
+        
+        // enable POST button only if image was selected
+        if (self.imageView.image != nil) {
+            self.postBtn.isEnabled = true
+            self.postBtn.backgroundColor = .systemBlue
+            self.noteLabel.text = ""
+            self.addImageBtn.setImage(UIImage(systemName: "arrow.2.circlepath"), for: .normal)
+            
+        }
         
         if (self.imageView.image?.jpegData(compressionQuality: 0.75)) != nil {
             
