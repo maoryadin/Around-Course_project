@@ -16,6 +16,7 @@
 		BC1E7C8E23FEB44000A13948 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1E7C8D23FEB44000A13948 /* FeedViewController.swift */; };
 		BC28C8FD2405808500ECF857 /* extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC28C8FC2405808500ECF857 /* extention.swift */; };
 		BC28C8FF2405824000ECF857 /* postCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC28C8FE2405824000ECF857 /* postCell.swift */; };
+		BC3BD2AB244F114E00D10DCE /* UIColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3BD2AA244F114E00D10DCE /* UIColor + Hex.swift */; };
 		BC54D0222445E28F00921363 /* PopUpPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54D0212445E28F00921363 /* PopUpPostViewController.swift */; };
 		BC56093C23D1C01B003DC8FD /* FireBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC56093B23D1C01B003DC8FD /* FireBaseManager.swift */; };
 		BC5D28B023FD4A9F00D76D24 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5D28AF23FD4A9F00D76D24 /* UserData.swift */; };
@@ -76,6 +77,7 @@
 		BC1E7C8D23FEB44000A13948 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		BC28C8FC2405808500ECF857 /* extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extention.swift; sourceTree = "<group>"; };
 		BC28C8FE2405824000ECF857 /* postCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = postCell.swift; sourceTree = "<group>"; };
+		BC3BD2AA244F114E00D10DCE /* UIColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Hex.swift"; sourceTree = "<group>"; };
 		BC54D0212445E28F00921363 /* PopUpPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPostViewController.swift; sourceTree = "<group>"; };
 		BC56093B23D1C01B003DC8FD /* FireBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseManager.swift; sourceTree = "<group>"; };
 		BC5D28AF23FD4A9F00D76D24 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				BCE092B62441F7F000BD4730 /* Service.swift */,
 				E473B9C4244C57EF000F325A /* UiView.swift */,
 				BC8413DC244E608F0024FDA1 /* UITextView + Done.swift */,
+				BC3BD2AA244F114E00D10DCE /* UIColor + Hex.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				E457EA8E23A800B4000A7DE7 /* AppDelegate.swift in Sources */,
 				BCCBE1A42404022C00951426 /* addPostViewController.swift in Sources */,
 				BC28C8FF2405824000ECF857 /* postCell.swift in Sources */,
+				BC3BD2AB244F114E00D10DCE /* UIColor + Hex.swift in Sources */,
 				E457EA9023A800B4000A7DE7 /* SceneDelegate.swift in Sources */,
 				BC56093C23D1C01B003DC8FD /* FireBaseManager.swift in Sources */,
 				BCA7EBA224222B1400BC3A69 /* DBManager.swift in Sources */,

@@ -3,9 +3,6 @@ import Firebase
 import GoogleSignIn
 import FirebaseAuth
 import FirebaseDatabase
-import Pastel
-import IBAnimatable
-import Sica
 
 class SignInViewController: UIViewController,UITextFieldDelegate {
 

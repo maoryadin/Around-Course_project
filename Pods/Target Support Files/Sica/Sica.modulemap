@@ -1,6 +1,0 @@
-framework module Sica {
-  umbrella header "Sica-umbrella.h"
-
-  export *
-  module * { export * }
-}

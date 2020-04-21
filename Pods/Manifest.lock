@@ -248,7 +248,7 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (= 0.3.9011)
   - GoogleDataTransport (5.1.1)
-  - GoogleDataTransportCCTSupport (2.0.2):
+  - GoogleDataTransportCCTSupport (2.0.3):
     - GoogleDataTransport (~> 5.1)
     - nanopb (~> 0.3.901)
   - GoogleSignIn (5.0.2):
@@ -307,9 +307,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - Pastel (0.6.0)
   - PromisesObjC (1.2.8)
-  - Sica (0.4.1)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
@@ -324,8 +322,6 @@ DEPENDENCIES:
   - GoogleSignIn
   - IBAnimatable
   - Kingfisher (~> 5.13)
-  - Pastel
-  - Sica
   - SQLite.swift
 
 SPEC REPOS:
@@ -357,9 +353,7 @@ SPEC REPOS:
     - Kingfisher
     - leveldb-library
     - nanopb
-    - Pastel
     - PromisesObjC
-    - Sica
     - SQLite.swift
 
 SPEC CHECKSUMS:
@@ -379,7 +373,7 @@ SPEC CHECKSUMS:
   FirebaseStorage: b43ee271294227e1a3225544b073f3b49b427f46
   GoogleAppMeasurement: e49be3954045b17d046f271b9cc1ec052bad9702
   GoogleDataTransport: 6ffa4dd0b6d547f8d27b91bd92fa9e197a3f5f1f
-  GoogleDataTransportCCTSupport: 12f02e5c8f09c055615de90bcd5ba2c375546051
+  GoogleDataTransportCCTSupport: 2d7e609f8c5af1a33d7d59053e6f8cba59365df5
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
@@ -390,11 +384,9 @@ SPEC CHECKSUMS:
   Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
-  Sica: 1a76eae2d819ea30688bb073f502a1f47e421cdd
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
 
-PODFILE CHECKSUM: b61f437c760fbb265cef25a7094249b43a2c7424
+PODFILE CHECKSUM: 2fb8cd20db4b5eac1876c9a65f5dfe6074b588ca
 
 COCOAPODS: 1.9.1
