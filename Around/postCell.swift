@@ -40,6 +40,7 @@ class PostCell : UITableViewCell {
  lbl.font = UIFont.systemFont(ofSize: 16)
     lbl.textAlignment = .left
  lbl.numberOfLines = 0
+
  return lbl
  }()
     

@@ -1,10 +1,4 @@
-//
-//  LocationService.swift
-//  LocationStarterKit
-//
-//  Created by Takamitsu Mizutori on 2016/08/12.
-//  Copyright © 2016年 Goldrush Computing Inc. All rights reserved.
-//
+
 
 import UIKit
 import CoreLocation
@@ -119,7 +113,6 @@ public class LocationService: NSObject, CLLocationManagerDelegate{
     
     func notifiyDidUpdateLocation(newLocation:CLLocation){
         NotificationCenter.default.post(name: Notification.Name("didUpdateLocation"), object: nil, userInfo: ["location":newLocation])
-//        
-//        NotificationCenter.default.post(name: Notification.Name(rawValue:"didUpdateLocation"), object: nil, userInfo: ["location" : newLocation])
+
     }
 }

@@ -732,7 +732,6 @@
                                         <state key="normal" image="plus" catalog="system"/>
                                         <connections>
                                             <action selector="PostActionButtom_clicked:" destination="6g6-nS-hf8" eventType="touchUpInside" id="aue-rZ-m3M"/>
-                                            <action selector="loginButton_Click:" destination="i7s-bx-EoB" eventType="touchUpInside" id="6JU-ad-I5x"/>
                                         </connections>
                                     </button>
                                 </subviews>
