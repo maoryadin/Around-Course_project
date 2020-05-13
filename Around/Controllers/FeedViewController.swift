@@ -77,7 +77,7 @@ class FeedViewController: UIViewController {
                 let postLocation = CLLocation(latitude: data["lat"]! as! Double, longitude: data["long"]! as! Double)
                 let distanceInMeters = LocationService.sharedInstance.locationManager.location!.distance(from: postLocation) // result is in meters
 
-                if((distanceInMeters) <= 50.0){
+                if((distanceInMeters) <= 250.0){
                     let post = Post(json:data)
                     
                     print("adding post")

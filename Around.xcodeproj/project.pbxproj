@@ -145,6 +145,21 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		BC57D05F246BF30D00EAFEB0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E4C9D4C923CA128A00E94A9B /* SignInViewController.swift */,
+				BC173D8323FC253100A21104 /* RegisterViewController.swift */,
+				E4C9D4CB23CA377700E94A9B /* HomeViewController.swift */,
+				BC84B7AF23F98BFD001A5EBF /* ProfileViewController.swift */,
+				BC1E7C8D23FEB44000A13948 /* FeedViewController.swift */,
+				BCCBE1A32404022C00951426 /* addPostViewController.swift */,
+				BC723CA82412A79D00184B05 /* AroundViewController.swift */,
+				BC54D0212445E28F00921363 /* PopUpPostViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		BCE5551123FD433F00D92438 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +219,7 @@
 		E457EA8C23A800B4000A7DE7 /* Around */ = {
 			isa = PBXGroup;
 			children = (
+				BC57D05F246BF30D00EAFEB0 /* Controllers */,
 				BCE5551123FD433F00D92438 /* Model */,
 				E4C9D4C723CA0A1400E94A9B /* GoogleService-Info.plist */,
 				E457EA8D23A800B4000A7DE7 /* AppDelegate.swift */,
@@ -211,17 +227,9 @@
 				E457EA9B23A800B8000A7DE7 /* Info.plist */,
 				E457EA9823A800B8000A7DE7 /* LaunchScreen.storyboard */,
 				E457EA9323A800B4000A7DE7 /* Main.storyboard */,
-				E4C9D4C923CA128A00E94A9B /* SignInViewController.swift */,
-				BC173D8323FC253100A21104 /* RegisterViewController.swift */,
 				E457EA8F23A800B4000A7DE7 /* SceneDelegate.swift */,
-				E4C9D4CB23CA377700E94A9B /* HomeViewController.swift */,
-				BC84B7AF23F98BFD001A5EBF /* ProfileViewController.swift */,
-				BC1E7C8D23FEB44000A13948 /* FeedViewController.swift */,
-				BCCBE1A32404022C00951426 /* addPostViewController.swift */,
 				BC28C8FE2405824000ECF857 /* postCell.swift */,
-				BC723CA82412A79D00184B05 /* AroundViewController.swift */,
 				7575F4E32427ABFE00764B77 /* Around-Bridging-Header.h */,
-				BC54D0212445E28F00921363 /* PopUpPostViewController.swift */,
 			);
 			path = Around;
 			sourceTree = "<group>";

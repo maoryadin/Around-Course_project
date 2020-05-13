@@ -39,7 +39,7 @@ class AroundViewController: UIViewController, MKMapViewDelegate{
         docRef = Firestore.firestore().collection("Posts")
         self.userAnnotationImage = UIImage(named: "user_position_ball")!
         
-        self.accuracyRangeCircle = MKCircle(center: CLLocationCoordinate2D.init(latitude: LocationService.sharedInstance.locationManager.location!.coordinate.latitude, longitude: LocationService.sharedInstance.locationManager.location!.coordinate.longitude), radius: 50)
+        self.accuracyRangeCircle = MKCircle(center: CLLocationCoordinate2D.init(latitude: LocationService.sharedInstance.locationManager.location!.coordinate.latitude, longitude: LocationService.sharedInstance.locationManager.location!.coordinate.longitude), radius: 250)
         self.mapView.addOverlay(self.accuracyRangeCircle!)
 
         self.didInitialZoom = false
@@ -82,7 +82,9 @@ class AroundViewController: UIViewController, MKMapViewDelegate{
                 }
                 
                 if(diff.type == .modified) {
-                    
+                    self.removeSpecificAnnotation(time: diff.document["time"] as! String)
+                    let artwork = Artwork(json:diff.document.data())
+                    self.mapView.addAnnotation(artwork)
                 }
                 
             }
@@ -185,7 +187,7 @@ class AroundViewController: UIViewController, MKMapViewDelegate{
             self.mapView.setCenter(location.coordinate, animated: true)
         }
         
-        var accuracyRadius = 50.0
+        var accuracyRadius = 250.0
         if location.horizontalAccuracy > 0{
             if location.horizontalAccuracy > accuracyRadius{
                 accuracyRadius = location.horizontalAccuracy
